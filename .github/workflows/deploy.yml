@@ -26,16 +26,21 @@ jobs:
       - name: Build Astro site
         run: npm run build
 
-      - name: Deploy dist to cPanel via FTP
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.6
-        with:
-          server: ${{ secrets.CPANEL_FTP_HOST }}
-          username: ${{ secrets.CPANEL_FTP_USER }}
-          password: ${{ secrets.CPANEL_FTP_PASS }}
-          protocol: ftp
-          port: 21
-          local-dir: ./dist/
-          server-dir: public_html/
-          log-level: verbose
-          exclude: |
-            **/.DS_Store
+      - name: Install lftp
+        run: sudo apt-get update && sudo apt-get install -y lftp
+
+      - name: Deploy with lftp
+        env:
+          FTP_HOST: ${{ secrets.CPANEL_FTP_HOST }}
+          FTP_USER: ${{ secrets.CPANEL_FTP_USER }}
+          FTP_PASS: ${{ secrets.CPANEL_FTP_PASS }}
+        run: |
+          lftp -c "
+          set ftp:ssl-allow no;
+          set net:max-retries 2;
+          set net:timeout 20;
+          set xfer:clobber on;
+          open -u $FTP_USER,$FTP_PASS $FTP_HOST;
+          mirror -R --delete --verbose dist/ public_html/
+          bye
+          "
