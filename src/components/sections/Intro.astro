@@ -11,9 +11,19 @@ const { title, body } = Astro.props;
         <p class="text-sm font-semibold tracking-[0.02em] text-phx-2">Nosotros</p>
         <h2 class="mt-4 text-3xl font-semibold tracking-tight text-phx-6 md:text-4xl">{title}</h2>
       </div>
-      <div class="prose prose-slate max-w-none prose-p:my-6 prose-p:text-base prose-p:leading-8 prose-p:text-phx-7 md:prose-p:text-lg">
+      <div class="intro-copy max-w-none text-base leading-8 text-phx-7 md:text-lg">
         <slot>{body}</slot>
       </div>
     </div>
   </Container>
 </section>
+
+<style>
+  .intro-copy :global(p) {
+    margin: 0;
+  }
+
+  .intro-copy :global(p + p) {
+    margin-top: 1.5rem;
+  }
+</style>
