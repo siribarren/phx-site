@@ -1,0 +1,22 @@
+[
+  {
+    "question": "Que tipo de problemas aborda PHX",
+    "answer": "Trabajamos sobre fricciones operativas concretas: tareas manuales, baja trazabilidad, dispersion de datos, decisiones lentas, supervision compleja y herramientas desconectadas."
+  },
+  {
+    "question": "PHX implementa IA generica o soluciones de negocio",
+    "answer": "El foco esta en sistemas útiles para la operación. La IA se usa cuando mejora decisiones, clasificacion, supervision o productividad, no como un fin en si mismo."
+  },
+  {
+    "question": "Como parte un proyecto con PHX",
+    "answer": "Normalmente comenzamos con una conversacion corta para entender el flujo, la fricción y el impacto esperado. Desde ahi proponemos un discovery acotado y una primera arquitectura de solucion."
+  },
+  {
+    "question": "PHX trabaja solo con empresas del Grupo Phoenix",
+    "answer": "No necesariamente. El respaldo operativo del grupo aporta contexto y experiencia, pero las soluciones pueden responder a necesidades de distintas organizaciones."
+  },
+  {
+    "question": "Que incluye la etapa de metodología",
+    "answer": "La secuencia contempla discovery, design, build y scale. Eso permite pasar del problema real a una capacidad operativa con medicion y criterios de escalamiento."
+  }
+]

@@ -1,0 +1,9 @@
+{
+  "name": "PHX",
+  "legalName": "PHX | PHygital eXperience",
+  "tagline": "Sistemas inteligentes mejorando negocios",
+  "description": "Unidad tecnológica del grupo Phoenix enfocada en automatización operativa, sistemas inteligentes y analítica aplicada.",
+  "logo": "/logos/logo-phx-azul.png",
+  "fontPrimary": "Inter",
+  "fontFallback": "Helvetica Neue, Helvetica, Arial, sans-serif"
+}

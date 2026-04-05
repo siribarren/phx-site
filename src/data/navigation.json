@@ -1,0 +1,9 @@
+[
+  { "label": "Inicio", "href": "/" },
+  { "label": "Problemas", "href": "/#problemas" },
+  { "label": "Soluciones", "href": "/#soluciones" },
+  { "label": "Capacidades", "href": "/#capacidades" },
+  { "label": "Metodología", "href": "/#metodologia" },
+  { "label": "Nosotros", "href": "/#nosotros" },
+  { "label": "Contacto", "href": "/#contacto" }
+]

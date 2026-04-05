@@ -1,0 +1,36 @@
+---
+import Container from '../layout/Container.astro';
+import Card from '../ui/Card.astro';
+import SectionHeading from './SectionHeading.astro';
+
+const { items = [], limit } = Astro.props;
+const visibleItems = limit ? items.slice(0, limit) : items;
+---
+
+<section class="scroll-mt-16 py-16 md:py-20" id="soluciones">
+  <Container class="space-y-10">
+    <SectionHeading
+      eyebrow="Soluciones"
+      title="Aplicaciones concretas para cobranza, supervision, backoffice y visibilidad ejecutiva"
+      description="Cada solucion combina reglas de negocio, integracion de sistemas y criterio operativo para resolver una necesidad real."
+    />
+
+    <div class="grid gap-5 lg:grid-cols-2">
+      {visibleItems.map((item) => (
+        <Card class="flex h-full flex-col space-y-5">
+          <div class="space-y-3">
+            <h3 class="text-xl font-semibold text-phx-6">{item.title}</h3>
+            <p class="text-base leading-7 text-phx-7">{item.summary}</p>
+          </div>
+          <div class="mt-auto pt-5 flex min-h-[5.25rem] flex-wrap content-start gap-2">
+            {item.tags.map((tag) => (
+              <span class="inline-flex min-h-[2.5rem] items-center rounded-full bg-phx-4 px-3 py-1 text-xs font-semibold tracking-[0.02em] text-phx-2">
+                {tag}
+              </span>
+            ))}
+          </div>
+        </Card>
+      ))}
+    </div>
+  </Container>
+</section>

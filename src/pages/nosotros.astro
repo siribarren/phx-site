@@ -1,0 +1,33 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Container from '../components/layout/Container.astro';
+import CTASection from '../components/sections/CTASection.astro';
+import GroupEcosystem from '../components/sections/GroupEcosystem.astro';
+import NosotrosContent, { frontmatter } from '../content/pages/nosotros.md';
+import group from '../data/group.json';
+
+const { title, description, intro } = frontmatter;
+---
+
+<BaseLayout title={`${title} | PHX`} description={description}>
+  <section class="py-20 md:py-24">
+    <Container class="space-y-8">
+      <div class="max-w-3xl space-y-5">
+        <p class="text-sm font-semibold uppercase tracking-[0.24em] text-phx-2">Nosotros</p>
+        <h1 class="text-5xl font-semibold tracking-tight text-phx-6 md:text-6xl">{title}</h1>
+        <p class="text-lg leading-8 text-phx-7 md:text-xl">{intro}</p>
+      </div>
+      <div class="prose prose-slate max-w-3xl prose-h2:text-3xl prose-h2:font-semibold prose-p:text-base prose-p:leading-8 prose-p:text-phx-7 md:prose-p:text-lg">
+        <NosotrosContent />
+      </div>
+    </Container>
+  </section>
+
+  <GroupEcosystem group={group} />
+  <CTASection
+    title="Si buscas una unidad tecnologica con criterio operativo, conversemos"
+    description="Podemos revisar procesos, decisiones o flujos donde exista fricción y baja visibilidad."
+    primaryLabel="Contactar"
+    primaryHref="/#footer-contacto"
+  />
+</BaseLayout>

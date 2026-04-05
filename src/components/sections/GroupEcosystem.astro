@@ -1,0 +1,26 @@
+---
+import Container from '../layout/Container.astro';
+import Card from '../ui/Card.astro';
+import SectionHeading from './SectionHeading.astro';
+
+const { group } = Astro.props;
+---
+
+<section class="scroll-mt-16 py-16 md:py-20" id="grupo-phoenix">
+  <Container class="space-y-10">
+    <SectionHeading
+      eyebrow="Respaldo"
+      title={group.title}
+      description={group.description}
+    />
+
+    <div class="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+      {group.units.map((unit) => (
+        <Card class="h-full space-y-3">
+          <h3 class="text-xl font-semibold text-phx-6">{unit.name}</h3>
+          <p class="text-base leading-7 text-phx-7">{unit.summary}</p>
+        </Card>
+      ))}
+    </div>
+  </Container>
+</section>

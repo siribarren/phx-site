@@ -1,0 +1,26 @@
+[
+  {
+    "title": "Procesos manuales",
+    "description": "Procesos críticos que dependen de personas, planillas, correos y seguimiento manual."
+  },
+  {
+    "title": "Datos dispersos",
+    "description": "La información vive en múltiples sistemas y fuentes desconectadas."
+  },
+  {
+    "title": "Decisiones tardías",
+    "description": "La información existe, pero no llega a tiempo para decidir bien."
+  },
+  {
+    "title": "Herramientas desconectadas",
+    "description": "Los equipos operan en plataformas separadas sin una lógica unificada."
+  },
+  {
+    "title": "Tareas repetitivas",
+    "description": "Actividades de bajo valor consumen capacidad operativa relevante."
+  },
+  {
+    "title": "Perdida de tiempo operacional",
+    "description": "Se pierde tiempo coordinando, revisando, persiguiendo y corrigiendo."
+  }
+]

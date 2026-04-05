@@ -1,0 +1,42 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Container from '../components/layout/Container.astro';
+import Card from '../components/ui/Card.astro';
+import ContactoContent, { frontmatter } from '../content/pages/contacto.md';
+
+const { title, description, intro, email, phone } = frontmatter;
+---
+
+<BaseLayout title={`${title} | PHX`} description={description}>
+  <section class="py-20 md:py-24">
+    <Container class="grid gap-8 lg:grid-cols-[minmax(0,1fr)_24rem]">
+      <div class="space-y-8">
+        <div class="max-w-3xl space-y-5">
+          <p class="text-sm font-semibold uppercase tracking-[0.24em] text-phx-2">Contacto</p>
+          <h1 class="text-5xl font-semibold tracking-tight text-phx-6 md:text-6xl">{title}</h1>
+          <p class="text-lg leading-8 text-phx-7 md:text-xl">{intro}</p>
+        </div>
+        <div class="prose prose-slate max-w-3xl prose-h2:text-3xl prose-h2:font-semibold prose-p:text-base prose-p:leading-8 prose-p:text-phx-7 md:prose-p:text-lg">
+          <ContactoContent />
+        </div>
+      </div>
+
+      <Card class="space-y-6 self-start">
+        <div>
+          <p class="text-sm font-semibold uppercase tracking-[0.24em] text-phx-2">Canales</p>
+          <h2 class="mt-3 text-2xl font-semibold text-phx-6">Empecemos por una conversacion concreta</h2>
+        </div>
+        <div class="space-y-4 text-base text-phx-7">
+          <p>
+            <span class="block text-sm font-medium uppercase tracking-[0.18em] text-phx-2">Correo</span>
+            <a class="mt-2 inline-block text-lg font-medium text-phx-6" href={`mailto:${email}`}>{email}</a>
+          </p>
+          <p>
+            <span class="block text-sm font-medium uppercase tracking-[0.18em] text-phx-2">Telefono</span>
+            <a class="mt-2 inline-block text-lg font-medium text-phx-6" href={`tel:${phone}`}>{phone}</a>
+          </p>
+        </div>
+      </Card>
+    </Container>
+  </section>
+</BaseLayout>

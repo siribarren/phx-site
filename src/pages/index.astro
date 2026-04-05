@@ -1,0 +1,58 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/sections/Hero.astro';
+import Intro from '../components/sections/Intro.astro';
+import ProblemsGrid from '../components/sections/ProblemsGrid.astro';
+import CapabilitiesGrid from '../components/sections/CapabilitiesGrid.astro';
+import SolutionsGrid from '../components/sections/SolutionsGrid.astro';
+import MethodologySteps from '../components/sections/MethodologySteps.astro';
+import GroupEcosystem from '../components/sections/GroupEcosystem.astro';
+import CTASection from '../components/sections/CTASection.astro';
+import ContactBlock from '../components/sections/ContactBlock.astro';
+import FaqAccordion from '../components/sections/FaqAccordion.astro';
+import { getSiteData } from '../lib/content';
+import HomeContent, { frontmatter } from '../content/pages/home.md';
+import { frontmatter as contactFrontmatter } from '../content/pages/contacto.md';
+
+const { problems, capabilities, solutions, methodology, group } = getSiteData();
+const {
+  title,
+  description,
+  heroTitle,
+  heroSubtitle,
+  heroPrimaryCtaLabel,
+  heroPrimaryCtaHref,
+  heroSecondaryCtaLabel,
+  heroSecondaryCtaHref,
+} = frontmatter;
+---
+
+<BaseLayout title={title} description={description}>
+  <Hero
+    title={heroTitle}
+    subtitle={heroSubtitle}
+    primaryLabel={heroPrimaryCtaLabel}
+    primaryHref={heroPrimaryCtaHref}
+    secondaryLabel={heroSecondaryCtaLabel}
+    secondaryHref={heroSecondaryCtaHref}
+  />
+
+  <ProblemsGrid items={problems} />
+  <SolutionsGrid items={solutions} limit={6} />
+  <CapabilitiesGrid items={capabilities} />
+  <MethodologySteps items={methodology} />
+  <Intro title="Que es PHX">
+    <HomeContent />
+  </Intro>
+  <ContactBlock email={contactFrontmatter.email} phone={contactFrontmatter.phone} />
+  <GroupEcosystem group={group} />
+  <FaqAccordion />
+  <CTASection
+    title="Convirtamos una fricción operativa en una capacidad concreta del negocio"
+    description="Si hoy hay un proceso que depende de coordinación manual, herramientas desconectadas o decisiones lentas, podemos disenarlo contigo."
+    primaryLabel="Hablemos"
+    primaryHref="/#footer-contacto"
+    secondaryLabel="Explorar soluciones"
+    secondaryHref="/#soluciones"
+  />
+</BaseLayout>

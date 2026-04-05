@@ -1,0 +1,17 @@
+---
+const { class: className = '' } = Astro.props;
+---
+
+<article class:list={['relative overflow-hidden rounded-3xl border border-phx-8 bg-white p-6 shadow-panel', className]}>
+  <div
+    aria-hidden="true"
+    class="pointer-events-none absolute inset-x-6 top-0 h-px bg-gradient-to-r from-transparent via-phx-3/40 to-transparent"
+  />
+  <div
+    aria-hidden="true"
+    class="pointer-events-none absolute -right-10 -top-10 h-28 w-28 rounded-full bg-phx-4/70 blur-2xl"
+  />
+  <div class="relative">
+    <slot />
+  </div>
+</article>

@@ -1,0 +1,33 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Container from '../components/layout/Container.astro';
+import CTASection from '../components/sections/CTASection.astro';
+import SolutionsGrid from '../components/sections/SolutionsGrid.astro';
+import SolucionesContent, { frontmatter } from '../content/pages/soluciones.md';
+import solutions from '../data/solutions.json';
+
+const { title, description, intro } = frontmatter;
+---
+
+<BaseLayout title={`${title} | PHX`} description={description}>
+  <section class="py-20 md:py-24">
+    <Container class="space-y-8">
+      <div class="max-w-3xl space-y-5">
+        <p class="text-sm font-semibold uppercase tracking-[0.24em] text-phx-2">Soluciones</p>
+        <h1 class="text-5xl font-semibold tracking-tight text-phx-6 md:text-6xl">{title}</h1>
+        <p class="text-lg leading-8 text-phx-7 md:text-xl">{intro}</p>
+      </div>
+      <div class="prose prose-slate max-w-3xl prose-h2:text-3xl prose-h2:font-semibold prose-p:text-base prose-p:leading-8 prose-p:text-phx-7 md:prose-p:text-lg">
+        <SolucionesContent />
+      </div>
+    </Container>
+  </section>
+
+  <SolutionsGrid items={solutions} />
+  <CTASection
+    title="Priorizamos soluciones que mejoran ejecución, trazabilidad y capacidad de accion"
+    description="Si ya tienes un caso de uso claro, podemos aterrizarlo a una primera arquitectura de implementacion."
+    primaryLabel="Conversemos"
+    primaryHref="/#footer-contacto"
+  />
+</BaseLayout>

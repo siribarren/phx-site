@@ -1,0 +1,36 @@
+---
+import Container from './Container.astro';
+import Button from '../ui/Button.astro';
+
+const { brand, navigation = [] } = Astro.props;
+const pathname = Astro.url.pathname;
+---
+
+<header class="sticky top-0 z-40 border-b border-phx-8 bg-white">
+  <Container class="flex items-center justify-between gap-6 py-2.5">
+    <a class="flex items-center" href="/">
+      <img alt={brand.name} class="h-[3.3rem] w-auto md:h-[3.5rem]" src={brand.logo} />
+    </a>
+
+    <nav aria-label="Principal" class="hidden items-center gap-6 lg:flex">
+      {navigation.map((item) => {
+        const isActive = item.href === '/' ? pathname === '/' : pathname === '/' && item.href.startsWith('/#');
+        return (
+          <a
+            class:list={[
+              'text-sm font-medium transition-colors duration-200',
+              isActive ? 'text-phx-2' : 'text-phx-7 hover:text-phx-2',
+            ]}
+            href={item.href}
+          >
+            {item.label}
+          </a>
+        );
+      })}
+    </nav>
+
+    <div class="hidden sm:block">
+      <Button href="/#footer-contacto" size="sm">Conversemos</Button>
+    </div>
+  </Container>
+</header>

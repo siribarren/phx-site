@@ -1,0 +1,28 @@
+---
+import Container from '../layout/Container.astro';
+import Card from '../ui/Card.astro';
+import SectionHeading from './SectionHeading.astro';
+
+const { items = [] } = Astro.props;
+---
+
+<section class="scroll-mt-16 py-12 md:py-16" id="problemas">
+  <Container class="space-y-8">
+    <SectionHeading
+      eyebrow="Problemas"
+      title="Fricciones operativas que impiden que el negocio avance al ritmo que necesita"
+      description="PHX interviene donde la coordinación manual, la baja trazabilidad y la dispersion de datos afectan la ejecución."
+    />
+
+    <div class="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+      {items.map((item) => (
+        <Card class="flex h-full flex-col gap-3 p-5">
+          <div class="space-y-3">
+            <h3 class="text-lg font-semibold text-phx-6 md:text-xl">{item.title}</h3>
+            <p class="text-sm leading-6 text-phx-7 md:text-base">{item.description}</p>
+          </div>
+        </Card>
+      ))}
+    </div>
+  </Container>
+</section>

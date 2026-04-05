@@ -1,0 +1,44 @@
+[
+  {
+    "id": "orquestacion-omnicanal",
+    "title": "Orquestacion Automatizada de Cobranza Omnicanal",
+    "summary": "Coordinamos acciones entre call center, WhatsApp, SMS, correo, terreno y derivaciones internas segun eventos y comportamiento del cliente.",
+    "tags": ["Omnicanal", "Automatización", "Cobranza"]
+  },
+  {
+    "id": "agentes-inteligentes",
+    "title": "Agentes Inteligentes para Gestion y Supervision",
+    "summary": "Implementamos agentes especializados para apoyar a ejecutivos, supervisores y equipos operativos en tareas críticas, seguimiento y ejecución diaria.",
+    "tags": ["Agentes", "Supervision", "Productividad"]
+  },
+  {
+    "id": "automatizacion-backoffice",
+    "title": "Automatización de Procesos Operativos",
+    "summary": "Transformamos tareas repetitivas y procesos manuales en flujos inteligentes que ejecutan, notifican y coordinan automáticamente cada etapa de la operación.",
+    "tags": ["Backoffice", "Flujos", "Automatización"]
+  },
+  {
+    "id": "inteligencia-conversacional",
+    "title": "Inteligencia Conversacional y Control de Calidad",
+    "summary": "Aplicamos IA sobre llamadas, chats y conversaciones para medir calidad, detectar patrones y mejorar la efectividad de cada interacción.",
+    "tags": ["Call Quality", "Conversacional", "Control"]
+  },
+  {
+    "id": "analitica-predictiva",
+    "title": "Analítica Predictiva y Modelos de Recuperación",
+    "summary": "Construimos modelos para anticipar comportamiento, proyectar resultados y optimizar decisiones de recuperación con mayor precisión y oportunidad.",
+    "tags": ["Prediccion", "Modelos", "Decision"]
+  },
+  {
+    "id": "reportes-ejecutivos",
+    "title": "Automatización de Reportes y Visibilidad Ejecutiva",
+    "summary": "Automatizamos la generación y distribución de reportes operativos, tacticos y ejecutivos con lectura inteligente de desempeño.",
+    "tags": ["Reportes", "Visibilidad", "KPIs"]
+  },
+  {
+    "id": "priorizacion-cartera",
+    "title": "Priorizacion Inteligente de Cartera",
+    "summary": "Aplicamos modelos para identificar que clientes, segmentos o cuentas tienen mayor probabilidad de contacto, pago o renegociacion.",
+    "tags": ["Scoring", "Cartera", "Prioridad"]
+  }
+]

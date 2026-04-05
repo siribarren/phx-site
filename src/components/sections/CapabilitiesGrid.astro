@@ -1,0 +1,33 @@
+---
+import Container from '../layout/Container.astro';
+import Card from '../ui/Card.astro';
+import SectionHeading from './SectionHeading.astro';
+
+const { items = [] } = Astro.props;
+---
+
+<section class="scroll-mt-16 py-16 md:py-20" id="capacidades">
+  <Container class="space-y-10">
+    <SectionHeading
+      eyebrow="Capacidades"
+      title="Diseñamos sistemas que combinan criterio, automatización y datos"
+      description="No vendemos tecnologia aislada. Construimos capacidades operativas que se integran a la lógica del negocio."
+    />
+
+    <div class="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+      {items.map((item) => (
+        <Card class="h-full space-y-0 pt-3">
+          <div class="flex items-center justify-between gap-4">
+            <span class="inline-flex min-h-[2.5rem] items-center rounded-full bg-phx-4 px-3 py-1 text-xs font-semibold tracking-[0.02em] text-phx-2">
+              {item.short}
+            </span>
+          </div>
+          <div class="pt-7 space-y-3">
+            <h3 class="text-xl font-semibold text-phx-6">{item.title}</h3>
+            <p class="text-base leading-7 text-phx-7">{item.description}</p>
+          </div>
+        </Card>
+      ))}
+    </div>
+  </Container>
+</section>

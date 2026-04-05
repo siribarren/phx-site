@@ -1,0 +1,22 @@
+{
+  "title": "Parte del ecosistema Phoenix Service",
+  "description": "PHX integra capacidades tecnologicas con experiencia operativa real en gestion de clientes, cobranzas, atencion, canales digitales y control de ejecución.",
+  "units": [
+    {
+      "name": "Phoenix Service",
+      "summary": "Gestion integral de clientes, cobranzas y operación omnicanal."
+    },
+    {
+      "name": "PH Legal",
+      "summary": "Gestion judicial, trazabilidad, control y seguimiento legal."
+    },
+    {
+      "name": "PH Sales",
+      "summary": "Canales digitales, social commerce, televentas y conversion."
+    },
+    {
+      "name": "PHX",
+      "summary": "Sistemas inteligentes, automatización y analítica aplicada."
+    }
+  ]
+}

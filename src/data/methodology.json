@@ -1,0 +1,18 @@
+[
+  {
+    "step": "Discovery",
+    "description": "Identificamos fricciones, tiempos muertos, tareas repetitivas, puntos de decision y perdidas de capacidad."
+  },
+  {
+    "step": "Design",
+    "description": "Definimos lógica de negocio, actores, reglas, datos, eventos, decisiones y automatizaciones."
+  },
+  {
+    "step": "Build",
+    "description": "Conectamos herramientas, APIs, flujos, tableros, agentes y componentes operativos."
+  },
+  {
+    "step": "Scale",
+    "description": "Medimos impacto, afinamos lógica y escalamos lo que genera resultado."
+  }
+]

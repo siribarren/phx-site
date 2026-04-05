@@ -1,0 +1,19 @@
+---
+import Container from '../layout/Container.astro';
+
+const { title, body } = Astro.props;
+---
+
+<section class="scroll-mt-16 py-8 md:py-12" id="nosotros">
+  <Container>
+    <div class="grid gap-8 rounded-[2rem] border border-phx-8 bg-white p-8 shadow-panel lg:grid-cols-[0.85fr_1.15fr] lg:p-10">
+      <div>
+        <p class="text-sm font-semibold tracking-[0.02em] text-phx-2">Nosotros</p>
+        <h2 class="mt-4 text-3xl font-semibold tracking-tight text-phx-6 md:text-4xl">{title}</h2>
+      </div>
+      <div class="prose prose-slate max-w-none prose-p:my-6 prose-p:text-base prose-p:leading-8 prose-p:text-phx-7 md:prose-p:text-lg">
+        <slot>{body}</slot>
+      </div>
+    </div>
+  </Container>
+</section>

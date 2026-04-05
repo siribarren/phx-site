@@ -1,0 +1,156 @@
+---
+import Container from './Container.astro';
+import Button from '../ui/Button.astro';
+
+const { brand } = Astro.props;
+const phoenixHref = 'https://www.phoenixservice.cl';
+const whatsappHref = 'https://wa.me/56998866033?text=Hola%2C%20te%20escribo%20desde%20el%20sitio%20web%20de%20PHX%20y%20me%20gustar%C3%ADa%20tener%20mas%20informaci%C3%B3n%20de%20sus%20servicios';
+
+const footerGroups = [
+  {
+    title: 'Paises',
+    items: [
+      { label: 'Chile', href: '/#footer-contacto' },
+      { label: 'Peru', href: '/#footer-contacto' },
+    ],
+  },
+  {
+    title: 'Sitio',
+    items: [
+      { label: 'Nosotros', href: '/#nosotros' },
+      { label: 'Soluciones', href: '/#soluciones' },
+      { label: 'Problemas', href: '/#problemas' },
+      { label: 'Metodologias', href: '/#metodologia' },
+      { label: 'Contacto', href: '/#contacto' },
+      { label: 'Preguntas preguntas', href: '/#preguntas' },
+    ],
+  },
+  {
+    title: 'Grupo',
+    items: [
+      { label: 'Grupo Phoenix', href: phoenixHref },
+      { label: 'Corporativo', href: phoenixHref },
+      { label: 'Trabaja con Nosotros', href: '/#footer-contacto' },
+      { label: 'Certificados', href: phoenixHref },
+      { label: 'Privacidad y Proteccion de Datos', href: phoenixHref },
+      { label: 'Canal de Denuncias', href: phoenixHref },
+      { label: 'Terminos y Condiciones', href: '/#footer-contacto' },
+    ],
+  },
+];
+
+const socials = [
+  { label: 'LinkedIn', short: 'in', href: 'https://www.linkedin.com/company/108355521/admin/' },
+  { label: 'Instagram', short: 'ig', href: '#' },
+  { label: 'X', short: 'x', href: '#' },
+];
+---
+
+<footer class="mt-8 bg-phx-2 text-white" id="footer-contacto">
+  <Container class="space-y-16 py-14 md:py-16">
+    <div class="grid gap-10 rounded-[2rem] border border-white/10 bg-white/5 p-8 lg:grid-cols-[0.95fr_1.05fr] lg:p-10">
+      <div class="space-y-5">
+        <p class="text-sm font-semibold tracking-[0.02em] text-white/70">Conversemos</p>
+        <h2 class="max-w-2xl text-3xl font-semibold tracking-tight md:text-4xl">
+          Empecemos por una conversacion simple y un problema concreto
+        </h2>
+        <p class="max-w-xl text-base leading-7 text-white/72 md:text-lg">
+          Este formulario es una simulacion de integracion. Sirve para mostrar la experiencia que deberia recibir un lead al llegar desde el boton principal del sitio.
+        </p>
+        <div class="flex flex-col gap-3 sm:flex-row">
+          <a
+            class="inline-flex items-center justify-center rounded-full border border-white/20 bg-white/10 px-5 py-3 text-sm font-semibold transition-colors hover:bg-white/15"
+            href={whatsappHref}
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            WhatsApp
+          </a>
+          <a class="inline-flex items-center justify-center rounded-full border border-white/20 bg-white/10 px-5 py-3 text-sm font-semibold transition-colors hover:bg-white/15" href="#">
+            Agente IA
+          </a>
+        </div>
+      </div>
+
+      <form class="grid gap-4 rounded-[1.75rem] bg-white p-6 text-phx-6 shadow-panel">
+        <div class="grid gap-4 md:grid-cols-2">
+          <label class="grid gap-2 text-sm font-medium">
+            Nombre
+            <input class="rounded-2xl border border-phx-8 px-4 py-3 outline-none transition-colors focus:border-phx-3" type="text" placeholder="Tu nombre" />
+          </label>
+          <label class="grid gap-2 text-sm font-medium">
+            Empresa
+            <input class="rounded-2xl border border-phx-8 px-4 py-3 outline-none transition-colors focus:border-phx-3" type="text" placeholder="Tu empresa" />
+          </label>
+        </div>
+        <div class="grid gap-4 md:grid-cols-2">
+          <label class="grid gap-2 text-sm font-medium">
+            Correo
+            <input class="rounded-2xl border border-phx-8 px-4 py-3 outline-none transition-colors focus:border-phx-3" type="email" placeholder="nombre@empresa.com" />
+          </label>
+          <label class="grid gap-2 text-sm font-medium">
+            Telefono
+            <input class="rounded-2xl border border-phx-8 px-4 py-3 outline-none transition-colors focus:border-phx-3" type="tel" placeholder="+56 9 0000 0000" />
+          </label>
+        </div>
+        <label class="grid gap-2 text-sm font-medium">
+          Cuentanos el desafio
+          <textarea class="min-h-[8rem] rounded-2xl border border-phx-8 px-4 py-3 outline-none transition-colors focus:border-phx-3" placeholder="Describe brevemente la fricción, el proceso o la oportunidad que quieres revisar."></textarea>
+        </label>
+        <div class="flex justify-start">
+          <Button>Enviar solicitud</Button>
+        </div>
+      </form>
+    </div>
+
+    <div class="grid gap-10 border-t border-white/12 pt-12 lg:grid-cols-[0.9fr_1.1fr]">
+      <div class="space-y-4">
+      </div>
+
+      <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+        {footerGroups.map((group) => (
+          <div class="space-y-4">
+            <h3 class="text-sm font-semibold uppercase tracking-[0.22em] text-white/60">{group.title}</h3>
+            <ul class="space-y-3 text-sm text-white/78">
+              {group.items.map((item) => (
+                <li>
+                  <a
+                    class="transition-colors hover:text-white"
+                    href={item.href}
+                    rel={item.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                    target={item.href.startsWith('http') ? '_blank' : undefined}
+                  >
+                    {item.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <div class="flex flex-col gap-6 border-t border-white/12 pt-8 md:flex-row md:items-center md:justify-between">
+      <p class="text-sm text-white/70">PHX todos los derechos reservados - 2026</p>
+      <div class="flex flex-col gap-4 md:flex-row md:items-center">
+        <div class="flex items-center gap-3">
+          {socials.map((social) => (
+            <a
+              aria-label={social.label}
+              class="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/20 text-sm font-semibold text-white/80 transition-colors hover:bg-white/10 hover:text-white"
+              href={social.href}
+              rel={social.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+              target={social.href.startsWith('http') ? '_blank' : undefined}
+            >
+              {social.short}
+            </a>
+          ))}
+        </div>
+        <div class="flex items-center gap-3 text-sm text-white/70">
+          <span>powered by</span>
+          <img alt={brand.name} class="h-7 w-auto brightness-0 invert" src={brand.logo} />
+        </div>
+      </div>
+    </div>
+  </Container>
+</footer>
