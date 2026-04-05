@@ -41,6 +41,6 @@ jobs:
           set net:timeout 20;
           set xfer:clobber on;
           open -u $FTP_USER,$FTP_PASS $FTP_HOST;
-          mirror -R --delete --verbose dist/ public_html/
+          mirror -R --delete --verbose dist/ ./
           bye
           "
