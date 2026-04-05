@@ -1,6 +1,6 @@
 ---
 title: "PHX | Sistemas que mejoran la ejecución del negocio"
-description: "Diseñamos sistemas inteligentes, automatización operativa y analítica aplicada para resolver fricciones reales del negocio."
+description: "Diseñamos soluciones que automatizan tareas, conectan información y ayudan a resolver problemas reales de operación."
 heroTitle: "Sistemas que mejoran la ejecución del negocio"
 heroSubtitle: "No implementamos IA. Diseñamos sistemas que hacen que el negocio funcione mejor."
 heroPrimaryCtaLabel: "Conversemos"
