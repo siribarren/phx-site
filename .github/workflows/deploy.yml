@@ -18,6 +18,7 @@ jobs:
         with:
           node-version: 20
           cache: npm
+          package-manager-cache: false
 
       - name: Install dependencies
         run: npm ci
@@ -25,7 +26,7 @@ jobs:
       - name: Build Astro site
         run: npm run build
 
-      - name: Deploy dist to cPanel via FTP
+      - name: Deploy dist to cPanel via FTPS
         uses: SamKirkland/FTP-Deploy-Action@v4.3.6
         with:
           server: ${{ secrets.CPANEL_FTP_HOST }}
@@ -34,4 +35,5 @@ jobs:
           protocol: ftps
           port: 21
           local-dir: ./dist/
-          server-dir: /
+          server-dir: /public_html/
+          log-level: verbose
