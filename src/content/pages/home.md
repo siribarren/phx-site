@@ -9,9 +9,9 @@ heroSecondaryCtaLabel: "Ver soluciones"
 heroSecondaryCtaHref: "/#soluciones"
 ---
 
-Somos la unidad tecnologica de Phoenix Service enfocada en resolver problemas reales del negocio mediante sistemas inteligentes, automatización operativa y analítica aplicada. 
+Somos la unidad tecnológica de Phoenix Service enfocada en resolver problemas reales del negocio mediante sistemas inteligentes, automatización operativa y analítica aplicada. 
 
-Nuestro foco no esta en la tecnologia por si sola, sino en su capacidad de reducir tiempos, elevar productividad, mejorar decisiones y transformar procesos en capacidades escalables.
+Nuestro foco no esta en la tecnología por si sola, sino en su capacidad de reducir tiempos, elevar productividad, mejorar decisiones y transformar procesos en capacidades escalables.
 
 Diseñamos e implementamos sistemas que conectan procesos, decisiones, datos, equipos y canales para operar con mayor precision, velocidad y control.
 
