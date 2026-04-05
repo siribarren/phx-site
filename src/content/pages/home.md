@@ -1,7 +1,7 @@
 ---
-title: "PHX | Sistemas inteligentes mejorando negocios"
+title: "PHX | Sistemas que mejoran la ejecución del negocio"
 description: "Diseñamos sistemas inteligentes, automatización operativa y analítica aplicada para resolver fricciones reales del negocio."
-heroTitle: "Sistemas inteligentes mejorando negocios"
+heroTitle: "Sistemas que mejoran la ejecución del negocio"
 heroSubtitle: "No implementamos IA. Diseñamos sistemas que hacen que el negocio funcione mejor."
 heroPrimaryCtaLabel: "Conversemos"
 heroPrimaryCtaHref: "/#footer-contacto"

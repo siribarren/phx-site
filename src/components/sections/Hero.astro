@@ -10,6 +10,10 @@ const {
   secondaryLabel,
   secondaryHref,
 } = Astro.props;
+
+const highlightText = 'la ejecución del negocio';
+const hasHighlight = title?.includes(highlightText);
+const [titlePrefix, titleSuffix] = hasHighlight ? title.split(highlightText) : [title, ''];
 ---
 
 <section class="relative overflow-hidden pb-20 pt-14 md:pb-28 md:pt-10">
@@ -18,7 +22,9 @@ const {
       <div class="space-y-8 md:-mt-8">
         <div class="space-y-4">
           <h1 class="max-w-4xl text-5xl font-semibold tracking-tight text-phx-6 md:text-6xl">
-            Sistemas que mejoran <span class="text-phx-1">la ejecución del negocio</span>
+            {titlePrefix}
+            {hasHighlight ? <span class="text-phx-1">{highlightText}</span> : title}
+            {titleSuffix}
           </h1>
           <p class="max-w-2xl text-lg leading-8 text-phx-7 md:text-xl">{subtitle}</p>
         </div>
