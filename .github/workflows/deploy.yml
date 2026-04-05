@@ -26,14 +26,16 @@ jobs:
       - name: Build Astro site
         run: npm run build
 
-      - name: Deploy dist to cPanel via FTPS
+      - name: Deploy dist to cPanel via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.6
         with:
           server: ${{ secrets.CPANEL_FTP_HOST }}
           username: ${{ secrets.CPANEL_FTP_USER }}
           password: ${{ secrets.CPANEL_FTP_PASS }}
-          protocol: ftps
+          protocol: ftp
           port: 21
           local-dir: ./dist/
-          server-dir: /public_html/
+          server-dir: public_html/
           log-level: verbose
+          exclude: |
+            **/.DS_Store
