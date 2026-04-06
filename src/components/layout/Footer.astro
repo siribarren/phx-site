@@ -44,6 +44,10 @@ const socials = [
   { label: 'Instagram', short: 'ig', href: '#' },
   { label: 'X', short: 'x', href: '#' },
 ];
+
+const inputClass =
+  'rounded-2xl border border-phx-8 px-4 py-3 outline-none transition-colors focus:border-phx-3';
+const errorClass = 'min-h-[1.25rem] text-sm text-red-600';
 ---
 
 <footer class="mt-8 bg-phx-2 text-white" id="footer-contacto">
@@ -55,7 +59,7 @@ const socials = [
           Empecemos por una conversacion simple y un problema concreto
         </h2>
         <p class="max-w-xl text-base leading-7 text-white/72 md:text-lg">
-          Este formulario es una simulacion de integracion. Sirve para mostrar la experiencia que deberia recibir un lead al llegar desde el boton principal del sitio.
+          Completa tus datos y cuentanos que desafio quieres resolver. Un ejecutivo humano de PHX revisara tu solicitud y te contactara a la brevedad.
         </p>
         <div class="flex flex-col gap-3 sm:flex-row">
           <a
@@ -72,33 +76,51 @@ const socials = [
         </div>
       </div>
 
-      <form class="grid gap-4 rounded-[1.75rem] bg-white p-6 text-phx-6 shadow-panel">
+      <form class="grid gap-4 rounded-[1.75rem] bg-white p-6 text-phx-6 shadow-panel" data-contact-form novalidate>
+        <div class="hidden" aria-hidden="true">
+          <label class="grid gap-2 text-sm font-medium" for="website">
+            Sitio web
+            <input id="website" name="website" autocomplete="off" tabindex="-1" type="text" />
+          </label>
+        </div>
         <div class="grid gap-4 md:grid-cols-2">
-          <label class="grid gap-2 text-sm font-medium">
+          <label class="grid gap-2 text-sm font-medium" for="contact-name">
             Nombre
-            <input class="rounded-2xl border border-phx-8 px-4 py-3 outline-none transition-colors focus:border-phx-3" type="text" placeholder="Tu nombre" />
+            <input class={inputClass} id="contact-name" name="name" type="text" placeholder="Tu nombre" autocomplete="name" />
+            <span class={errorClass} data-error-for="name"></span>
           </label>
-          <label class="grid gap-2 text-sm font-medium">
+          <label class="grid gap-2 text-sm font-medium" for="contact-company">
             Empresa
-            <input class="rounded-2xl border border-phx-8 px-4 py-3 outline-none transition-colors focus:border-phx-3" type="text" placeholder="Tu empresa" />
+            <input class={inputClass} id="contact-company" name="company" type="text" placeholder="Tu empresa" autocomplete="organization" />
+            <span class={errorClass} data-error-for="company"></span>
           </label>
         </div>
         <div class="grid gap-4 md:grid-cols-2">
-          <label class="grid gap-2 text-sm font-medium">
+          <label class="grid gap-2 text-sm font-medium" for="contact-email">
             Correo
-            <input class="rounded-2xl border border-phx-8 px-4 py-3 outline-none transition-colors focus:border-phx-3" type="email" placeholder="nombre@empresa.com" />
+            <input class={inputClass} id="contact-email" name="email" type="email" placeholder="nombre@empresa.com" autocomplete="email" />
+            <span class={errorClass} data-error-for="email"></span>
           </label>
-          <label class="grid gap-2 text-sm font-medium">
+          <label class="grid gap-2 text-sm font-medium" for="contact-phone">
             Telefono
-            <input class="rounded-2xl border border-phx-8 px-4 py-3 outline-none transition-colors focus:border-phx-3" type="tel" placeholder="+56 9 0000 0000" />
+            <input class={inputClass} id="contact-phone" name="phone" type="tel" placeholder="+56912345678" autocomplete="tel" />
+            <span class={errorClass} data-error-for="phone"></span>
           </label>
         </div>
-        <label class="grid gap-2 text-sm font-medium">
+        <label class="grid gap-2 text-sm font-medium" for="contact-message">
           Cuentanos el desafio
-          <textarea class="min-h-[8rem] rounded-2xl border border-phx-8 px-4 py-3 outline-none transition-colors focus:border-phx-3" placeholder="Describe brevemente la fricción, el proceso o la oportunidad que quieres revisar."></textarea>
+          <textarea class="min-h-[8rem] rounded-2xl border border-phx-8 px-4 py-3 outline-none transition-colors focus:border-phx-3" id="contact-message" name="message" placeholder="Describe brevemente la friccion, el proceso o la oportunidad que quieres revisar."></textarea>
+          <span class={errorClass} data-error-for="message"></span>
         </label>
+        <label class="grid gap-2 rounded-2xl border border-phx-8/80 bg-phx-8/30 px-4 py-4 text-sm font-medium" for="contact-human-check">
+          Validacion humana
+          <span class="text-sm font-normal text-phx-6/75">Para continuar, escribe <strong>PHX</strong> en el campo inferior.</span>
+          <input class={inputClass} id="contact-human-check" name="humanCheck" type="text" placeholder="Escribe PHX" autocomplete="off" />
+          <span class={errorClass} data-error-for="humanCheck"></span>
+        </label>
+        <div class="min-h-[1.5rem] rounded-2xl px-1 py-1 text-sm font-medium" data-form-status role="status" aria-live="polite"></div>
         <div class="flex justify-start">
-          <Button>Enviar solicitud</Button>
+          <Button type="submit">Enviar solicitud</Button>
         </div>
       </form>
     </div>
@@ -154,3 +176,175 @@ const socials = [
     </div>
   </Container>
 </footer>
+
+<script>
+  const form = document.querySelector('[data-contact-form]');
+
+  if (form instanceof HTMLFormElement) {
+    const statusNode = form.querySelector('[data-form-status]');
+    const submitButton = form.querySelector('button[type="submit"]');
+
+    const patterns = {
+      name: /^[A-Za-zÁÉÍÓÚÜÑáéíóúüñ'’.\-\s]+$/,
+      company: /^[A-Za-zÁÉÍÓÚÜÑáéíóúüñ0-9&().,'’\-\s]+$/,
+      email: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+      phone: /^\+569\d{8}$/,
+    };
+
+    const fields = ['name', 'company', 'email', 'phone', 'message', 'humanCheck'];
+
+    const setFieldError = (fieldName, message) => {
+      const errorNode = form.querySelector(`[data-error-for="${fieldName}"]`);
+      const input = form.elements.namedItem(fieldName);
+
+      if (errorNode) {
+        errorNode.textContent = message || '';
+      }
+
+      if (input instanceof HTMLElement) {
+        if (message) {
+          input.setAttribute('aria-invalid', 'true');
+          input.classList.add('border-red-500');
+        } else {
+          input.removeAttribute('aria-invalid');
+          input.classList.remove('border-red-500');
+        }
+      }
+    };
+
+    const setStatus = (message, tone = 'neutral') => {
+      if (!(statusNode instanceof HTMLElement)) return;
+
+      statusNode.textContent = message || '';
+      statusNode.className = 'min-h-[1.5rem] rounded-2xl px-1 py-1 text-sm font-medium';
+
+      if (!message) return;
+
+      if (tone === 'success') {
+        statusNode.classList.add('bg-emerald-50', 'text-emerald-700');
+      } else if (tone === 'error') {
+        statusNode.classList.add('bg-red-50', 'text-red-700');
+      } else {
+        statusNode.classList.add('bg-phx-8/40', 'text-phx-6');
+      }
+    };
+
+    const validateField = (fieldName) => {
+      const input = form.elements.namedItem(fieldName);
+      const value = typeof input?.value === 'string' ? input.value.trim() : '';
+
+      switch (fieldName) {
+        case 'name':
+          if (!value) return 'Ingresa tu nombre.';
+          if (!patterns.name.test(value)) return 'El nombre solo puede contener texto y espacios.';
+          return '';
+        case 'company':
+          if (!value) return 'Ingresa el nombre de tu empresa.';
+          if (!patterns.company.test(value)) return 'La empresa solo puede contener texto y numeros.';
+          return '';
+        case 'email':
+          if (!value) return 'Ingresa tu correo corporativo o personal.';
+          if (!patterns.email.test(value)) return 'Ingresa un correo valido.';
+          return '';
+        case 'phone':
+          if (!value) return 'Ingresa tu telefono en formato +569XXXXXXXX.';
+          if (!patterns.phone.test(value)) return 'El telefono debe comenzar con +569 y tener 8 digitos adicionales.';
+          return '';
+        case 'message':
+          if (!value) return 'Cuentanos brevemente que necesitas resolver.';
+          return '';
+        case 'humanCheck':
+          if (!value) return 'Completa la validacion humana escribiendo PHX.';
+          if (value.toUpperCase() !== 'PHX') return 'La validacion humana no coincide. Escribe PHX.';
+          return '';
+        default:
+          return '';
+      }
+    };
+
+    const validateForm = () => {
+      const errors = {};
+
+      for (const fieldName of fields) {
+        const message = validateField(fieldName);
+        errors[fieldName] = message;
+        setFieldError(fieldName, message);
+      }
+
+      const hasErrors = Object.values(errors).some(Boolean);
+      return { errors, hasErrors };
+    };
+
+    for (const fieldName of fields) {
+      const input = form.elements.namedItem(fieldName);
+      if (input instanceof HTMLElement) {
+        input.addEventListener('input', () => {
+          setFieldError(fieldName, validateField(fieldName));
+          setStatus('');
+        });
+      }
+    }
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      setStatus('');
+
+      const { hasErrors } = validateForm();
+      if (hasErrors) {
+        setStatus('Completa correctamente los campos marcados antes de enviar el formulario.', 'error');
+        return;
+      }
+
+      const formData = new FormData(form);
+
+      if (submitButton instanceof HTMLButtonElement) {
+        submitButton.disabled = true;
+        submitButton.textContent = 'Enviando...';
+      }
+
+      setStatus('Estamos enviando tu mensaje.', 'neutral');
+
+      try {
+        const response = await fetch('/api/contact', {
+          method: 'POST',
+          body: formData,
+        });
+
+        const result = await response.json();
+
+        fields.forEach((fieldName) => setFieldError(fieldName, ''));
+
+        if (!response.ok) {
+          if (result?.errors && typeof result.errors === 'object') {
+            Object.entries(result.errors).forEach(([fieldName, message]) => {
+              if (typeof message === 'string') {
+                setFieldError(fieldName, message);
+              }
+            });
+          }
+
+          setStatus(
+            result?.message || result?.errors?.form || 'No fue posible enviar el formulario. Intenta nuevamente.',
+            'error',
+          );
+          return;
+        }
+
+        form.reset();
+        setStatus(
+          result?.message ||
+            'Tu mensaje fue enviado correctamente. Un ejecutivo humano de PHX te contactara a la brevedad.',
+          'success',
+        );
+      } catch (error) {
+        console.error(error);
+        setStatus('No fue posible enviar el formulario. Intenta nuevamente en unos minutos.', 'error');
+      } finally {
+        if (submitButton instanceof HTMLButtonElement) {
+          submitButton.disabled = false;
+          submitButton.textContent = 'Enviar solicitud';
+        }
+      }
+    });
+  }
+</script>
