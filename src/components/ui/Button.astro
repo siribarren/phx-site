@@ -3,6 +3,8 @@ const {
   href,
   variant = 'primary',
   size = 'md',
+  type = 'button',
+  disabled = false,
   class: className = '',
 } = Astro.props;
 
@@ -16,7 +18,7 @@ const sizes = {
   md: 'px-5 py-3 text-sm md:text-base',
 };
 
-const classes = `inline-flex items-center justify-center rounded-full font-semibold transition-colors duration-200 ${variants[variant]} ${sizes[size]} ${className}`;
+const classes = `inline-flex items-center justify-center rounded-full font-semibold transition-colors duration-200 ${variants[variant]} ${sizes[size]} disabled:cursor-not-allowed disabled:opacity-70 ${className}`;
 ---
 
 {href ? (
@@ -24,7 +26,7 @@ const classes = `inline-flex items-center justify-center rounded-full font-semib
     <slot />
   </a>
 ) : (
-  <button class={classes} type="button">
+  <button class={classes} disabled={disabled} type={type}>
     <slot />
   </button>
 )}

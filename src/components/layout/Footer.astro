@@ -1,6 +1,6 @@
 ---
 import Container from './Container.astro';
-import Button from '../ui/Button.astro';
+import ContactForm from '../forms/ContactForm.astro';
 
 const { brand } = Astro.props;
 const phoenixHref = 'https://www.phoenixservice.cl';
@@ -55,7 +55,7 @@ const socials = [
           Empecemos por una conversacion simple y un problema concreto
         </h2>
         <p class="max-w-xl text-base leading-7 text-white/72 md:text-lg">
-          Este formulario es una simulacion de integracion. Sirve para mostrar la experiencia que deberia recibir un lead al llegar desde el boton principal del sitio.
+          Si ya tienes un flujo identificado, cuentanos el contexto y te responderemos por correo con un siguiente paso concreto.
         </p>
         <div class="flex flex-col gap-3 sm:flex-row">
           <a
@@ -72,35 +72,11 @@ const socials = [
         </div>
       </div>
 
-      <form class="grid gap-4 rounded-[1.75rem] bg-white p-6 text-phx-6 shadow-panel">
-        <div class="grid gap-4 md:grid-cols-2">
-          <label class="grid gap-2 text-sm font-medium">
-            Nombre
-            <input class="rounded-2xl border border-phx-8 px-4 py-3 outline-none transition-colors focus:border-phx-3" type="text" placeholder="Tu nombre" />
-          </label>
-          <label class="grid gap-2 text-sm font-medium">
-            Empresa
-            <input class="rounded-2xl border border-phx-8 px-4 py-3 outline-none transition-colors focus:border-phx-3" type="text" placeholder="Tu empresa" />
-          </label>
-        </div>
-        <div class="grid gap-4 md:grid-cols-2">
-          <label class="grid gap-2 text-sm font-medium">
-            Correo
-            <input class="rounded-2xl border border-phx-8 px-4 py-3 outline-none transition-colors focus:border-phx-3" type="email" placeholder="nombre@empresa.com" />
-          </label>
-          <label class="grid gap-2 text-sm font-medium">
-            Telefono
-            <input class="rounded-2xl border border-phx-8 px-4 py-3 outline-none transition-colors focus:border-phx-3" type="tel" placeholder="+56 9 0000 0000" />
-          </label>
-        </div>
-        <label class="grid gap-2 text-sm font-medium">
-          Cuentanos el desafio
-          <textarea class="min-h-[8rem] rounded-2xl border border-phx-8 px-4 py-3 outline-none transition-colors focus:border-phx-3" placeholder="Describe brevemente la fricción, el proceso o la oportunidad que quieres revisar."></textarea>
-        </label>
-        <div class="flex justify-start">
-          <Button>Enviar solicitud</Button>
-        </div>
-      </form>
+      <ContactForm
+        intro="Dejanos tus datos y el desafio principal. Este envio esta protegido para reducir spam y solicitudes automatizadas."
+        source="footer"
+        title="Formulario de contacto"
+      />
     </div>
 
     <div class="grid gap-10 border-t border-white/12 pt-12 lg:grid-cols-[0.9fr_1.1fr]">

@@ -1,0 +1,360 @@
+---
+import Button from '../ui/Button.astro';
+
+type ContactSource = 'footer' | 'contacto';
+
+interface Props {
+  source: ContactSource;
+  title?: string;
+  intro?: string;
+  class?: string;
+}
+
+const {
+  source,
+  title = 'Cuentanos el desafio',
+  intro = 'Comparte el flujo, friccion u oportunidad que quieres revisar y te responderemos por correo.',
+  class: className = '',
+} = Astro.props;
+
+const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY ?? '';
+const contactEndpointUrl = import.meta.env.PUBLIC_CONTACT_ENDPOINT_URL ?? '';
+const isConfigured = Boolean(turnstileSiteKey && contactEndpointUrl);
+const formId = `contact-form-${source}`;
+---
+
+<div class={`rounded-[1.75rem] bg-white p-6 text-phx-6 shadow-panel ${className}`}>
+  <div class="space-y-2">
+    <h3 class="text-2xl font-semibold text-phx-6">{title}</h3>
+    <p class="text-sm leading-6 text-phx-7">{intro}</p>
+  </div>
+
+  <form
+    aria-describedby={`${formId}-status`}
+    class="mt-6 grid gap-4"
+    data-contact-form
+    data-endpoint={contactEndpointUrl}
+    data-site-key={turnstileSiteKey}
+    data-source={source}
+    id={formId}
+    novalidate
+  >
+    <div class="grid gap-4 md:grid-cols-2">
+      <label class="grid gap-2 text-sm font-medium">
+        Nombre
+        <input
+          class="rounded-2xl border border-phx-8 px-4 py-3 outline-none transition-colors focus:border-phx-3"
+          maxlength="120"
+          minlength="2"
+          name="name"
+          placeholder="Tu nombre"
+          required
+          type="text"
+        />
+      </label>
+      <label class="grid gap-2 text-sm font-medium">
+        Empresa
+        <input
+          class="rounded-2xl border border-phx-8 px-4 py-3 outline-none transition-colors focus:border-phx-3"
+          maxlength="120"
+          name="company"
+          placeholder="Tu empresa"
+          type="text"
+        />
+      </label>
+    </div>
+
+    <div class="grid gap-4 md:grid-cols-2">
+      <label class="grid gap-2 text-sm font-medium">
+        Correo
+        <input
+          class="rounded-2xl border border-phx-8 px-4 py-3 outline-none transition-colors focus:border-phx-3"
+          maxlength="160"
+          name="email"
+          placeholder="nombre@empresa.com"
+          required
+          type="email"
+        />
+      </label>
+      <label class="grid gap-2 text-sm font-medium">
+        Telefono
+        <input
+          class="rounded-2xl border border-phx-8 px-4 py-3 outline-none transition-colors focus:border-phx-3"
+          maxlength="32"
+          name="phone"
+          placeholder="+56 9 0000 0000"
+          type="tel"
+        />
+      </label>
+    </div>
+
+    <label class="grid gap-2 text-sm font-medium">
+      Mensaje
+      <textarea
+        class="min-h-[8rem] rounded-2xl border border-phx-8 px-4 py-3 outline-none transition-colors focus:border-phx-3"
+        maxlength="2000"
+        minlength="10"
+        name="message"
+        placeholder="Describe brevemente la fricción, el proceso o la oportunidad que quieres revisar."
+        required
+      ></textarea>
+    </label>
+
+    <div aria-hidden="true" class="hidden">
+      <label>
+        Website
+        <input autocomplete="off" name="website" tabindex="-1" type="text" />
+      </label>
+    </div>
+
+    <div class="space-y-3">
+      <div class="min-h-[80px] rounded-2xl border border-dashed border-phx-8 bg-phx-5/60 px-3 py-3">
+        {isConfigured ? (
+          <div class="flex min-h-[52px] items-center" data-turnstile-container></div>
+        ) : (
+          <p class="text-sm leading-6 text-amber-700">
+            Configura <code>PUBLIC_TURNSTILE_SITE_KEY</code> y <code>PUBLIC_CONTACT_ENDPOINT_URL</code> para activar el envio.
+          </p>
+        )}
+      </div>
+      <p class="text-xs leading-5 text-phx-7">
+        Este formulario esta protegido por Cloudflare Turnstile para reducir envios automatizados.
+      </p>
+    </div>
+
+    <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+      <Button data-submit-button size="sm" type="submit">
+        Enviar
+      </Button>
+      <p class="min-h-[1.5rem] text-sm leading-6 text-phx-7" id={`${formId}-status`} data-form-status role="status"></p>
+    </div>
+  </form>
+</div>
+
+<script>
+  const TURNSTILE_SCRIPT_URL = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';
+  let turnstileScriptPromise;
+
+  function loadTurnstileScript() {
+    if (window.turnstile) {
+      return Promise.resolve(window.turnstile);
+    }
+
+    if (turnstileScriptPromise) {
+      return turnstileScriptPromise;
+    }
+
+    turnstileScriptPromise = new Promise((resolve, reject) => {
+      const existingScript = document.querySelector(`script[src="${TURNSTILE_SCRIPT_URL}"]`);
+
+      if (existingScript) {
+        existingScript.addEventListener('load', () => resolve(window.turnstile), { once: true });
+        existingScript.addEventListener('error', () => reject(new Error('turnstile_script_failed')), { once: true });
+        return;
+      }
+
+      const script = document.createElement('script');
+      script.src = TURNSTILE_SCRIPT_URL;
+      script.async = true;
+      script.defer = true;
+      script.onload = () => resolve(window.turnstile);
+      script.onerror = () => reject(new Error('turnstile_script_failed'));
+      document.head.appendChild(script);
+    });
+
+    return turnstileScriptPromise;
+  }
+
+  function setStatus(form, message, tone = 'muted') {
+    const status = form.querySelector('[data-form-status]');
+    if (!status) return;
+
+    status.textContent = message;
+    status.classList.remove('text-phx-7', 'text-emerald-700', 'text-rose-700', 'text-amber-700');
+
+    if (tone === 'success') {
+      status.classList.add('text-emerald-700');
+      return;
+    }
+
+    if (tone === 'error') {
+      status.classList.add('text-rose-700');
+      return;
+    }
+
+    if (tone === 'warning') {
+      status.classList.add('text-amber-700');
+      return;
+    }
+
+    status.classList.add('text-phx-7');
+  }
+
+  function setSubmitting(form, isSubmitting) {
+    const submitButton = form.querySelector('[data-submit-button]');
+    if (!submitButton) return;
+
+    submitButton.disabled = isSubmitting;
+    submitButton.textContent = isSubmitting ? 'Enviando...' : 'Enviar solicitud';
+  }
+
+  function normalizePayload(form, token) {
+    const formData = new FormData(form);
+    return {
+      name: String(formData.get('name') || '').trim(),
+      company: String(formData.get('company') || '').trim(),
+      email: String(formData.get('email') || '').trim(),
+      phone: String(formData.get('phone') || '').trim(),
+      message: String(formData.get('message') || '').trim(),
+      source: String(form.dataset.source || ''),
+      website: String(formData.get('website') || '').trim(),
+      'cf-turnstile-response': token,
+    };
+  }
+
+  function validatePayload(payload) {
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (payload.name.length < 2 || payload.name.length > 120) {
+      return 'Ingresa un nombre válido.';
+    }
+
+    if (!emailPattern.test(payload.email) || payload.email.length > 160) {
+      return 'Ingresa un correo válido.';
+    }
+
+    if (payload.company.length > 120) {
+      return 'El nombre de la empresa es demasiado largo.';
+    }
+
+    if (payload.phone.length > 32) {
+      return 'El teléfono es demasiado largo.';
+    }
+
+    if (payload.message.length < 10 || payload.message.length > 2000) {
+      return 'Cuentanos un poco mas sobre el desafio que quieres revisar.';
+    }
+
+    return '';
+  }
+
+  function setupForm(form) {
+    if (form.dataset.enhanced === 'true') {
+      return;
+    }
+
+    form.dataset.enhanced = 'true';
+
+    const endpoint = form.dataset.endpoint || '';
+    const siteKey = form.dataset.siteKey || '';
+    const turnstileContainer = form.querySelector('[data-turnstile-container]');
+    let captchaToken = '';
+    let widgetId = null;
+
+    const resetWidget = () => {
+      captchaToken = '';
+      if (window.turnstile && widgetId !== null) {
+        window.turnstile.reset(widgetId);
+      }
+    };
+
+    if (!endpoint || !siteKey || !turnstileContainer) {
+      setStatus(form, 'El formulario todavia no esta configurado para recibir envios.', 'warning');
+      return;
+    }
+
+    loadTurnstileScript()
+      .then((turnstile) => {
+        if (!turnstile || widgetId !== null) {
+          return;
+        }
+
+        widgetId = turnstile.render(turnstileContainer, {
+          sitekey: siteKey,
+          theme: 'light',
+          callback: (token) => {
+            captchaToken = token;
+            setStatus(form, '');
+          },
+          'expired-callback': () => {
+            captchaToken = '';
+            setStatus(form, 'El captcha expiro. Completalo nuevamente para continuar.', 'warning');
+          },
+          'error-callback': () => {
+            captchaToken = '';
+            setStatus(form, 'No pudimos validar el captcha. Intenta nuevamente.', 'error');
+          },
+        });
+      })
+      .catch(() => {
+        setStatus(form, 'No pudimos cargar la validacion anti-bot. Recarga la pagina e intentalo otra vez.', 'error');
+      });
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+
+      const payload = normalizePayload(form, captchaToken);
+      const validationMessage = validatePayload(payload);
+
+      if (validationMessage) {
+        setStatus(form, validationMessage, 'error');
+        return;
+      }
+
+      if (!payload['cf-turnstile-response']) {
+        setStatus(form, 'Completa la verificación anti-bot antes de enviar el formulario.', 'warning');
+        return;
+      }
+
+      setSubmitting(form, true);
+      setStatus(form, 'Enviando tu solicitud...', 'muted');
+
+      try {
+        const response = await fetch(endpoint, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
+          },
+          body: JSON.stringify(payload),
+        });
+
+        const result = await response.json().catch(() => null);
+
+        if (!response.ok || !result?.ok) {
+          if (response.status === 429 || result?.error === 'rate_limit') {
+            setStatus(form, 'Recibimos varios intentos seguidos. Espera un momento y vuelve a intentarlo.', 'error');
+          } else if (response.status === 403 || result?.error === 'captcha') {
+            setStatus(form, 'No pudimos validar el captcha. Intenta nuevamente.', 'error');
+          } else if (response.status === 400 || result?.error === 'validation') {
+            setStatus(form, 'Revisa los datos del formulario antes de enviarlo otra vez.', 'error');
+          } else {
+            setStatus(form, 'No fue posible procesar el envío. Intenta nuevamente en unos minutos.', 'error');
+          }
+
+          resetWidget();
+          return;
+        }
+
+        form.reset();
+        resetWidget();
+        setStatus(form, 'Solicitud enviada. Te responderemos a la brevedad.', 'success');
+      } catch (_error) {
+        resetWidget();
+        setStatus(form, 'No fue posible procesar el envío. Intenta nuevamente en unos minutos.', 'error');
+      } finally {
+        setSubmitting(form, false);
+      }
+    });
+  }
+
+  function initializeContactForms() {
+    document.querySelectorAll('[data-contact-form]').forEach((form) => setupForm(form));
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initializeContactForms, { once: true });
+  } else {
+    initializeContactForms();
+  }
+</script>

@@ -1,0 +1,9 @@
+{
+  "name": "phx/contact-endpoint",
+  "description": "PHP endpoint for PHX contact form with Cloudflare Turnstile and SMTP delivery.",
+  "type": "project",
+  "require": {
+    "php": "^8.1",
+    "phpmailer/phpmailer": "^6.10"
+  }
+}
