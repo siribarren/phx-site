@@ -12,8 +12,8 @@ interface Props {
 
 const {
   source,
-  title = 'Cuentanos el desafio',
-  intro = 'Comparte el flujo, friccion u oportunidad que quieres revisar y te responderemos por correo.',
+  title = 'Cuentanos el desafío',
+  intro = 'Comparte el flujo, fricción u oportunidad que quieres revisar y te responderemos por correo.',
   class: className = '',
 } = Astro.props;
 
@@ -44,23 +44,27 @@ const formId = `contact-form-${source}`;
         Nombre
         <input
           class="rounded-2xl border border-phx-8 px-4 py-3 outline-none transition-colors focus:border-phx-3"
+          data-field="name"
           maxlength="120"
           minlength="2"
           name="name"
-          placeholder="Tu nombre"
+          placeholder="Como te gustaría que te contactemos"
           required
           type="text"
         />
+        <span class="min-h-[1.25rem] text-xs leading-5 text-rose-700" data-field-error="name" aria-live="polite"></span>
       </label>
       <label class="grid gap-2 text-sm font-medium">
         Empresa
         <input
           class="rounded-2xl border border-phx-8 px-4 py-3 outline-none transition-colors focus:border-phx-3"
+          data-field="company"
           maxlength="120"
           name="company"
-          placeholder="Tu empresa"
+          placeholder="Empresa o área responsable"
           type="text"
         />
+        <span class="min-h-[1.25rem] text-xs leading-5 text-rose-700" data-field-error="company" aria-live="polite"></span>
       </label>
     </div>
 
@@ -69,22 +73,26 @@ const formId = `contact-form-${source}`;
         Correo
         <input
           class="rounded-2xl border border-phx-8 px-4 py-3 outline-none transition-colors focus:border-phx-3"
+          data-field="email"
           maxlength="160"
           name="email"
-          placeholder="nombre@empresa.com"
+          placeholder="nombre@empresa.cl"
           required
           type="email"
         />
+        <span class="min-h-[1.25rem] text-xs leading-5 text-rose-700" data-field-error="email" aria-live="polite"></span>
       </label>
       <label class="grid gap-2 text-sm font-medium">
         Telefono
         <input
           class="rounded-2xl border border-phx-8 px-4 py-3 outline-none transition-colors focus:border-phx-3"
+          data-field="phone"
           maxlength="32"
           name="phone"
-          placeholder="+56 9 0000 0000"
+          placeholder="+56 9 1234 5678"
           type="tel"
         />
+        <span class="min-h-[1.25rem] text-xs leading-5 text-rose-700" data-field-error="phone" aria-live="polite"></span>
       </label>
     </div>
 
@@ -92,12 +100,14 @@ const formId = `contact-form-${source}`;
       Mensaje
       <textarea
         class="min-h-[8rem] rounded-2xl border border-phx-8 px-4 py-3 outline-none transition-colors focus:border-phx-3"
+        data-field="message"
         maxlength="2000"
         minlength="10"
         name="message"
-        placeholder="Describe brevemente la fricción, el proceso o la oportunidad que quieres revisar."
+        placeholder="Describe el flujo, problema u oportunidad que quieres revisar. Mientras mas contexto compartas, mejor podremos responder."
         required
       ></textarea>
+      <span class="min-h-[1.25rem] text-xs leading-5 text-rose-700" data-field-error="message" aria-live="polite"></span>
     </label>
 
     <div aria-hidden="true" class="hidden">
@@ -129,11 +139,32 @@ const formId = `contact-form-${source}`;
       <p class="min-h-[1.5rem] text-sm leading-6 text-phx-7" id={`${formId}-status`} data-form-status role="status"></p>
     </div>
   </form>
+
+  <dialog
+    aria-live="polite"
+    class="pointer-events-none invisible fixed bottom-4 left-1/2 z-50 flex -translate-x-1/2 rounded-2xl border border-emerald-200 bg-emerald-50 p-0 text-emerald-900 opacity-0 shadow-lg transition duration-300"
+    data-feedback-dialog="success"
+  >
+    <div class="p-4 text-center text-sm leading-6">
+      <p data-feedback-message="success">Mensaje enviado correctamente. Te responderemos por correo.</p>
+    </div>
+  </dialog>
+
+  <dialog
+    aria-live="assertive"
+    class="pointer-events-none invisible fixed bottom-4 left-1/2 z-50 flex -translate-x-1/2 rounded-2xl border border-rose-200 bg-rose-50 p-0 text-rose-900 opacity-0 shadow-lg transition duration-300"
+    data-feedback-dialog="error"
+  >
+    <div class="p-4 text-center text-sm leading-6">
+      <p data-feedback-message="error">No pudimos enviar tu mensaje. Intenta nuevamente o escribenos por correo.</p>
+    </div>
+  </dialog>
 </div>
 
 <script>
   const TURNSTILE_SCRIPT_URL = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';
   let turnstileScriptPromise;
+  const feedbackTimers = new WeakMap();
 
   function loadTurnstileScript() {
     if (window.turnstile) {
@@ -190,12 +221,41 @@ const formId = `contact-form-${source}`;
     status.classList.add('text-phx-7');
   }
 
+  function showFeedbackDialog(form, tone, message) {
+    const dialog = form.parentElement?.querySelector(`[data-feedback-dialog="${tone}"]`);
+    const messageNode = dialog?.querySelector(`[data-feedback-message="${tone}"]`);
+
+    if (!dialog || !messageNode) return;
+
+    messageNode.textContent = message;
+    dialog.classList.remove('invisible');
+    dialog.classList.add('opacity-100');
+
+    const activeTimers = feedbackTimers.get(dialog);
+    if (activeTimers) {
+      clearTimeout(activeTimers.fadeTimer);
+      clearTimeout(activeTimers.hideTimer);
+    }
+
+    const fadeTimer = window.setTimeout(() => {
+      dialog.classList.remove('opacity-100');
+
+      const hideTimer = window.setTimeout(() => {
+        dialog.classList.add('invisible');
+      }, 300);
+
+      feedbackTimers.set(dialog, { fadeTimer, hideTimer });
+    }, tone === 'success' ? 5000 : 7000);
+
+    feedbackTimers.set(dialog, { fadeTimer, hideTimer: 0 });
+  }
+
   function setSubmitting(form, isSubmitting) {
     const submitButton = form.querySelector('[data-submit-button]');
     if (!submitButton) return;
 
     submitButton.disabled = isSubmitting;
-    submitButton.textContent = isSubmitting ? 'Enviando...' : 'Enviar solicitud';
+    submitButton.textContent = isSubmitting ? 'Enviando...' : 'Enviar';
   }
 
   function normalizePayload(form, token) {
@@ -214,28 +274,61 @@ const formId = `contact-form-${source}`;
 
   function validatePayload(payload) {
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const errors = {};
 
     if (payload.name.length < 2 || payload.name.length > 120) {
-      return 'Ingresa un nombre válido.';
+      errors.name = 'Ingresa un nombre válido de al menos 2 caracteres.';
     }
 
     if (!emailPattern.test(payload.email) || payload.email.length > 160) {
-      return 'Ingresa un correo válido.';
+      errors.email = 'Ingresa un correo válido para poder responderte.';
     }
 
     if (payload.company.length > 120) {
-      return 'El nombre de la empresa es demasiado largo.';
+      errors.company = 'El nombre de la empresa es demasiado largo.';
     }
 
     if (payload.phone.length > 32) {
-      return 'El teléfono es demasiado largo.';
+      errors.phone = 'El teléfono es demasiado largo.';
     }
 
     if (payload.message.length < 10 || payload.message.length > 2000) {
-      return 'Cuentanos un poco mas sobre el desafio que quieres revisar.';
+      errors.message = 'Cuéntanos un poco mas sobre el desafío que quieres revisar.';
     }
 
-    return '';
+    return errors;
+  }
+
+  function setFieldError(form, fieldName, message = '') {
+    const input = form.querySelector(`[data-field="${fieldName}"]`);
+    const errorNode = form.querySelector(`[data-field-error="${fieldName}"]`);
+
+    if (!input || !errorNode) return;
+
+    input.setAttribute('aria-invalid', message ? 'true' : 'false');
+    errorNode.textContent = message;
+  }
+
+  function clearFieldErrors(form) {
+    form.querySelectorAll('[data-field]').forEach((field) => {
+      field.setAttribute('aria-invalid', 'false');
+    });
+
+    form.querySelectorAll('[data-field-error]').forEach((node) => {
+      node.textContent = '';
+    });
+  }
+
+  function applyFieldErrors(form, errors) {
+    clearFieldErrors(form);
+
+    Object.entries(errors).forEach(([fieldName, message]) => {
+      setFieldError(form, fieldName, message);
+    });
+  }
+
+  function getFirstErrorMessage(errors) {
+    return Object.values(errors).find(Boolean) || '';
   }
 
   function setupForm(form) {
@@ -257,6 +350,20 @@ const formId = `contact-form-${source}`;
         window.turnstile.reset(widgetId);
       }
     };
+
+    form.querySelectorAll('[data-field]').forEach((field) => {
+      const fieldName = field.getAttribute('data-field');
+      if (!fieldName) return;
+
+      const syncField = () => {
+        const payload = normalizePayload(form, captchaToken);
+        const errors = validatePayload(payload);
+        setFieldError(form, fieldName, errors[fieldName] || '');
+      };
+
+      field.addEventListener('input', syncField);
+      field.addEventListener('blur', syncField);
+    });
 
     if (!endpoint || !siteKey || !turnstileContainer) {
       setStatus(form, 'El formulario todavia no esta configurado para recibir envios.', 'warning');
@@ -294,12 +401,17 @@ const formId = `contact-form-${source}`;
       event.preventDefault();
 
       const payload = normalizePayload(form, captchaToken);
-      const validationMessage = validatePayload(payload);
+      const validationErrors = validatePayload(payload);
+      const validationMessage = getFirstErrorMessage(validationErrors);
 
       if (validationMessage) {
+        applyFieldErrors(form, validationErrors);
         setStatus(form, validationMessage, 'error');
+        showFeedbackDialog(form, 'error', 'Revisa los campos marcados antes de enviar el formulario.');
         return;
       }
+
+      clearFieldErrors(form);
 
       if (!payload['cf-turnstile-response']) {
         setStatus(form, 'Completa la verificación anti-bot antes de enviar el formulario.', 'warning');
@@ -324,12 +436,16 @@ const formId = `contact-form-${source}`;
         if (!response.ok || !result?.ok) {
           if (response.status === 429 || result?.error === 'rate_limit') {
             setStatus(form, 'Recibimos varios intentos seguidos. Espera un momento y vuelve a intentarlo.', 'error');
+            showFeedbackDialog(form, 'error', 'Recibimos varios intentos seguidos. Espera un momento y vuelve a intentarlo.');
           } else if (response.status === 403 || result?.error === 'captcha') {
             setStatus(form, 'No pudimos validar el captcha. Intenta nuevamente.', 'error');
+            showFeedbackDialog(form, 'error', 'No pudimos validar la verificacion anti-bot. Intenta nuevamente.');
           } else if (response.status === 400 || result?.error === 'validation') {
             setStatus(form, 'Revisa los datos del formulario antes de enviarlo otra vez.', 'error');
+            showFeedbackDialog(form, 'error', 'Hay datos pendientes o invalidos en el formulario.');
           } else {
             setStatus(form, 'No fue posible procesar el envío. Intenta nuevamente en unos minutos.', 'error');
+            showFeedbackDialog(form, 'error', 'No pudimos enviar tu mensaje. Intenta nuevamente en unos minutos.');
           }
 
           resetWidget();
@@ -337,11 +453,14 @@ const formId = `contact-form-${source}`;
         }
 
         form.reset();
+        clearFieldErrors(form);
         resetWidget();
         setStatus(form, 'Solicitud enviada. Te responderemos a la brevedad.', 'success');
+        showFeedbackDialog(form, 'success', 'Mensaje enviado correctamente. Te responderemos a la brevedad.');
       } catch (_error) {
         resetWidget();
         setStatus(form, 'No fue posible procesar el envío. Intenta nuevamente en unos minutos.', 'error');
+        showFeedbackDialog(form, 'error', 'No pudimos enviar tu mensaje. Intenta nuevamente en unos minutos.');
       } finally {
         setSubmitting(form, false);
       }
