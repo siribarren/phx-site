@@ -42,72 +42,117 @@ const formId = `contact-form-${source}`;
     <div class="grid gap-4 md:grid-cols-2">
       <label class="grid gap-2 text-sm font-medium">
         Nombre
-        <input
-          class="rounded-2xl border border-phx-8 px-4 py-3 outline-none transition-colors focus:border-phx-3"
-          data-field="name"
-          maxlength="120"
-          minlength="2"
-          name="name"
-          placeholder="Como te gustaría que te contactemos"
-          required
-          type="text"
-        />
-        <span class="min-h-[1.25rem] text-xs leading-5 text-rose-700" data-field-error="name" aria-live="polite"></span>
+        <span class="relative block">
+          <input
+            aria-describedby={`${formId}-name-error`}
+            class="rounded-2xl border border-phx-8 px-4 py-3 outline-none transition-colors focus:border-phx-3"
+            data-field="name"
+            maxlength="120"
+            minlength="2"
+            name="name"
+            placeholder="Como te gustaría que te contactemos"
+            required
+            type="text"
+          />
+          <span
+            aria-live="polite"
+            class="pointer-events-none absolute left-0 top-full z-10 mt-2 hidden rounded-2xl bg-rose-600 px-3 py-2 text-xs font-medium leading-5 text-white shadow-lg"
+            data-field-error="name"
+            id={`${formId}-name-error`}
+            role="alert"
+          ></span>
+        </span>
       </label>
       <label class="grid gap-2 text-sm font-medium">
         Empresa
-        <input
-          class="rounded-2xl border border-phx-8 px-4 py-3 outline-none transition-colors focus:border-phx-3"
-          data-field="company"
-          maxlength="120"
-          name="company"
-          placeholder="Empresa o área responsable"
-          type="text"
-        />
-        <span class="min-h-[1.25rem] text-xs leading-5 text-rose-700" data-field-error="company" aria-live="polite"></span>
+        <span class="relative block">
+          <input
+            aria-describedby={`${formId}-company-error`}
+            class="rounded-2xl border border-phx-8 px-4 py-3 outline-none transition-colors focus:border-phx-3"
+            data-field="company"
+            maxlength="120"
+            name="company"
+            placeholder="Empresa o área responsable"
+            type="text"
+          />
+          <span
+            aria-live="polite"
+            class="pointer-events-none absolute left-0 top-full z-10 mt-2 hidden rounded-2xl bg-rose-600 px-3 py-2 text-xs font-medium leading-5 text-white shadow-lg"
+            data-field-error="company"
+            id={`${formId}-company-error`}
+            role="alert"
+          ></span>
+        </span>
       </label>
     </div>
 
     <div class="grid gap-4 md:grid-cols-2">
       <label class="grid gap-2 text-sm font-medium">
         Correo
-        <input
-          class="rounded-2xl border border-phx-8 px-4 py-3 outline-none transition-colors focus:border-phx-3"
-          data-field="email"
-          maxlength="160"
-          name="email"
-          placeholder="nombre@empresa.cl"
-          required
-          type="email"
-        />
-        <span class="min-h-[1.25rem] text-xs leading-5 text-rose-700" data-field-error="email" aria-live="polite"></span>
+        <span class="relative block">
+          <input
+            aria-describedby={`${formId}-email-error`}
+            class="rounded-2xl border border-phx-8 px-4 py-3 outline-none transition-colors focus:border-phx-3"
+            data-field="email"
+            maxlength="160"
+            name="email"
+            placeholder="nombre@empresa.cl"
+            required
+            type="email"
+          />
+          <span
+            aria-live="polite"
+            class="pointer-events-none absolute left-0 top-full z-10 mt-2 hidden rounded-2xl bg-rose-600 px-3 py-2 text-xs font-medium leading-5 text-white shadow-lg"
+            data-field-error="email"
+            id={`${formId}-email-error`}
+            role="alert"
+          ></span>
+        </span>
       </label>
       <label class="grid gap-2 text-sm font-medium">
         Telefono
-        <input
-          class="rounded-2xl border border-phx-8 px-4 py-3 outline-none transition-colors focus:border-phx-3"
-          data-field="phone"
-          maxlength="32"
-          name="phone"
-          placeholder="+56 9 1234 5678"
-          type="tel"
-        />
-        <span class="min-h-[1.25rem] text-xs leading-5 text-rose-700" data-field-error="phone" aria-live="polite"></span>
+        <span class="relative block">
+          <input
+            aria-describedby={`${formId}-phone-error`}
+            class="rounded-2xl border border-phx-8 px-4 py-3 outline-none transition-colors focus:border-phx-3"
+            data-field="phone"
+            maxlength="32"
+            name="phone"
+            placeholder="+56 9 1234 5678"
+            type="tel"
+          />
+          <span
+            aria-live="polite"
+            class="pointer-events-none absolute left-0 top-full z-10 mt-2 hidden rounded-2xl bg-rose-600 px-3 py-2 text-xs font-medium leading-5 text-white shadow-lg"
+            data-field-error="phone"
+            id={`${formId}-phone-error`}
+            role="alert"
+          ></span>
+        </span>
       </label>
     </div>
 
     <label class="grid gap-2 text-sm font-medium">
       Mensaje
-      <textarea
-        class="min-h-[8rem] rounded-2xl border border-phx-8 px-4 py-3 outline-none transition-colors focus:border-phx-3"
-        data-field="message"
-        maxlength="2000"
-        minlength="10"
-        name="message"
-        placeholder="Describe el flujo, problema u oportunidad que quieres revisar. Mientras mas contexto compartas, mejor podremos responder."
-        required
-      ></textarea>
-      <span class="min-h-[1.25rem] text-xs leading-5 text-rose-700" data-field-error="message" aria-live="polite"></span>
+      <span class="relative block">
+        <textarea
+          aria-describedby={`${formId}-message-error`}
+          class="min-h-[8rem] rounded-2xl border border-phx-8 px-4 py-3 outline-none transition-colors focus:border-phx-3"
+          data-field="message"
+          maxlength="2000"
+          minlength="10"
+          name="message"
+          placeholder="Describe el flujo, problema u oportunidad que quieres revisar. Mientras mas contexto compartas, mejor podremos responder."
+          required
+        ></textarea>
+        <span
+          aria-live="polite"
+          class="pointer-events-none absolute left-0 top-full z-10 mt-2 hidden rounded-2xl bg-rose-600 px-3 py-2 text-xs font-medium leading-5 text-white shadow-lg"
+          data-field-error="message"
+          id={`${formId}-message-error`}
+          role="alert"
+        ></span>
+      </span>
     </label>
 
     <div aria-hidden="true" class="hidden">
@@ -307,6 +352,7 @@ const formId = `contact-form-${source}`;
 
     input.setAttribute('aria-invalid', message ? 'true' : 'false');
     errorNode.textContent = message;
+    errorNode.classList.toggle('hidden', !message);
   }
 
   function clearFieldErrors(form) {
@@ -316,6 +362,7 @@ const formId = `contact-form-${source}`;
 
     form.querySelectorAll('[data-field-error]').forEach((node) => {
       node.textContent = '';
+      node.classList.add('hidden');
     });
   }
 

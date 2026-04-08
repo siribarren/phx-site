@@ -32,7 +32,7 @@ jobs:
       - name: Install lftp
         run: sudo apt-get update && sudo apt-get install -y lftp
 
-      - name: Deploy with lftp
+      - name: Deploy with lftp without deleting server files
         env:
           FTP_HOST: ${{ secrets.CPANEL_FTP_HOST }}
           FTP_USER: ${{ secrets.CPANEL_FTP_USER }}
@@ -44,6 +44,6 @@ jobs:
           set net:timeout 20;
           set xfer:clobber on;
           open -u $FTP_USER,$FTP_PASS $FTP_HOST;
-          mirror -R --delete --verbose dist/ ./
+          mirror -R --verbose dist/ /public_html/;
           bye
           "
