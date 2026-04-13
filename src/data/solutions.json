@@ -1,38 +1,38 @@
 [
   {
     "id": "orquestacion-omnicanal",
-    "title": "Orquestacion Automatizada de Cobranza Omnicanal",
-    "summary": "Coordinamos acciones entre call center, WhatsApp, SMS, correo, terreno y derivaciones internas segun eventos y comportamiento del cliente.",
+    "title": "Orquestación automatizada de cobranza omnicanal",
+    "summary": "Recupera más cartera con menos esfuerzo. Coordinamos automáticamente cada canal — call center, WhatsApp, SMS, correo y terreno — según comportamiento y contexto del cliente.",
     "tags": ["Omnicanal", "Automatización", "Cobranza"]
   },
   {
     "id": "agentes-inteligentes",
-    "title": "Agentes Inteligentes para Gestion y Supervision",
-    "summary": "Implementamos agentes especializados para apoyar a ejecutivos, supervisores y equipos operativos en tareas críticas, seguimiento y ejecución diaria.",
+    "title": "Agentes inteligentes para gestión y supervisión",
+    "summary": "Mejores decisiones, en menos tiempo. Agentes que monitorean, alertan y recomiendan acciones en tiempo real para ejecutivos y supervisores.",
     "tags": ["Agentes", "Supervision", "Productividad"]
   },
   {
     "id": "automatizacion-backoffice",
-    "title": "Automatización de Procesos Operativos",
-    "summary": "Transformamos tareas repetitivas y procesos manuales en flujos inteligentes que ejecutan, notifican y coordinan automáticamente cada etapa de la operación.",
+    "title": "Automatización de procesos operativos y backoffice",
+    "summary": "Libera capacidad crítica de tu equipo. Flujos que ejecutan, actualizan, notifican y coordinan sin intervención manual.",
     "tags": ["Backoffice", "Flujos", "Automatización"]
   },
   {
     "id": "inteligencia-conversacional",
-    "title": "Inteligencia Conversacional y Control de Calidad",
-    "summary": "Aplicamos IA sobre llamadas, chats y conversaciones para medir calidad, detectar patrones y mejorar la efectividad de cada interacción.",
+    "title": "Inteligencia conversacional y control de calidad",
+    "summary": "Entiende qué ocurre en cada interacción. Analiza llamadas y chats para detectar patrones, riesgos y oportunidades de mejora.",
     "tags": ["Call Quality", "Conversacional", "Control"]
   },
   {
     "id": "analitica-predictiva",
-    "title": "Analítica Predictiva y Modelos de Recuperación",
-    "summary": "Construimos modelos para anticipar comportamiento, proyectar resultados y optimizar decisiones de recuperación con mayor precisión y oportunidad.",
+    "title": "Analítica predictiva y modelos de recuperación",
+    "summary": "Anticipa comportamiento y optimiza decisiones. Modelos que proyectan resultados y priorizan dónde actuar.",
     "tags": ["Prediccion", "Modelos", "Decision"]
   },
   {
     "id": "reportes-ejecutivos",
-    "title": "Automatización de Reportes y Visibilidad Ejecutiva",
-    "summary": "Automatizamos la generación y distribución de reportes operativos, tacticos y ejecutivos con lectura inteligente de desempeño.",
+    "title": "Automatización de reportes y visibilidad ejecutiva",
+    "summary": "La operación en tiempo real, sin esperar reportes. Dashboards y reportes automáticos con lectura clara del desempeño.",
     "tags": ["Reportes", "Visibilidad", "KPIs"]
   },
   {

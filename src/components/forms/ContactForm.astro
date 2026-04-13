@@ -40,12 +40,12 @@ const formId = `contact-form-${source}`;
     novalidate
   >
     <div class="grid gap-4 md:grid-cols-2">
-      <label class="grid gap-2 text-sm font-medium">
-        Nombre
+      <label class="grid gap-2 text-sm font-medium text-phx-6">
+        <span>Nombre</span>
         <span class="relative block">
           <input
             aria-describedby={`${formId}-name-error`}
-            class="rounded-2xl border border-phx-8 px-4 py-3 outline-none transition-colors focus:border-phx-3"
+            class="block w-full rounded-2xl border border-phx-8 bg-white px-4 py-3 text-sm text-phx-6 outline-none transition focus:border-phx-3 focus:ring-4 focus:ring-phx-4/60"
             data-field="name"
             maxlength="120"
             minlength="2"
@@ -56,19 +56,19 @@ const formId = `contact-form-${source}`;
           />
           <span
             aria-live="polite"
-            class="pointer-events-none absolute left-0 top-full z-10 mt-2 hidden rounded-2xl bg-rose-600 px-3 py-2 text-xs font-medium leading-5 text-white shadow-lg"
+            class="absolute left-4 top-full z-20 mt-2 hidden max-w-[15rem] rounded-xl border border-rose-200 bg-white px-3 py-2 text-xs font-medium leading-5 text-rose-700 shadow-[0_10px_30px_rgba(15,23,42,0.14)] before:absolute before:-top-[7px] before:left-5 before:h-3 before:w-3 before:rotate-45 before:border-l before:border-t before:border-rose-200 before:bg-white"
             data-field-error="name"
             id={`${formId}-name-error`}
             role="alert"
           ></span>
         </span>
       </label>
-      <label class="grid gap-2 text-sm font-medium">
-        Empresa
+      <label class="grid gap-2 text-sm font-medium text-phx-6">
+        <span>Empresa</span>
         <span class="relative block">
           <input
             aria-describedby={`${formId}-company-error`}
-            class="rounded-2xl border border-phx-8 px-4 py-3 outline-none transition-colors focus:border-phx-3"
+            class="block w-full rounded-2xl border border-phx-8 bg-white px-4 py-3 text-sm text-phx-6 outline-none transition focus:border-phx-3 focus:ring-4 focus:ring-phx-4/60"
             data-field="company"
             maxlength="120"
             name="company"
@@ -77,7 +77,7 @@ const formId = `contact-form-${source}`;
           />
           <span
             aria-live="polite"
-            class="pointer-events-none absolute left-0 top-full z-10 mt-2 hidden rounded-2xl bg-rose-600 px-3 py-2 text-xs font-medium leading-5 text-white shadow-lg"
+            class="absolute left-4 top-full z-20 mt-2 hidden max-w-[15rem] rounded-xl border border-rose-200 bg-white px-3 py-2 text-xs font-medium leading-5 text-rose-700 shadow-[0_10px_30px_rgba(15,23,42,0.14)] before:absolute before:-top-[7px] before:left-5 before:h-3 before:w-3 before:rotate-45 before:border-l before:border-t before:border-rose-200 before:bg-white"
             data-field-error="company"
             id={`${formId}-company-error`}
             role="alert"
@@ -87,12 +87,12 @@ const formId = `contact-form-${source}`;
     </div>
 
     <div class="grid gap-4 md:grid-cols-2">
-      <label class="grid gap-2 text-sm font-medium">
-        Correo
+      <label class="grid gap-2 text-sm font-medium text-phx-6">
+        <span>Correo</span>
         <span class="relative block">
           <input
             aria-describedby={`${formId}-email-error`}
-            class="rounded-2xl border border-phx-8 px-4 py-3 outline-none transition-colors focus:border-phx-3"
+            class="block w-full rounded-2xl border border-phx-8 bg-white px-4 py-3 text-sm text-phx-6 outline-none transition focus:border-phx-3 focus:ring-4 focus:ring-phx-4/60"
             data-field="email"
             maxlength="160"
             name="email"
@@ -102,19 +102,19 @@ const formId = `contact-form-${source}`;
           />
           <span
             aria-live="polite"
-            class="pointer-events-none absolute left-0 top-full z-10 mt-2 hidden rounded-2xl bg-rose-600 px-3 py-2 text-xs font-medium leading-5 text-white shadow-lg"
+            class="absolute left-4 top-full z-20 mt-2 hidden max-w-[15rem] rounded-xl border border-rose-200 bg-white px-3 py-2 text-xs font-medium leading-5 text-rose-700 shadow-[0_10px_30px_rgba(15,23,42,0.14)] before:absolute before:-top-[7px] before:left-5 before:h-3 before:w-3 before:rotate-45 before:border-l before:border-t before:border-rose-200 before:bg-white"
             data-field-error="email"
             id={`${formId}-email-error`}
             role="alert"
           ></span>
         </span>
       </label>
-      <label class="grid gap-2 text-sm font-medium">
-        Telefono
+      <label class="grid gap-2 text-sm font-medium text-phx-6">
+        <span>Teléfono</span>
         <span class="relative block">
           <input
             aria-describedby={`${formId}-phone-error`}
-            class="rounded-2xl border border-phx-8 px-4 py-3 outline-none transition-colors focus:border-phx-3"
+            class="block w-full rounded-2xl border border-phx-8 bg-white px-4 py-3 text-sm text-phx-6 outline-none transition focus:border-phx-3 focus:ring-4 focus:ring-phx-4/60"
             data-field="phone"
             maxlength="32"
             name="phone"
@@ -123,7 +123,7 @@ const formId = `contact-form-${source}`;
           />
           <span
             aria-live="polite"
-            class="pointer-events-none absolute left-0 top-full z-10 mt-2 hidden rounded-2xl bg-rose-600 px-3 py-2 text-xs font-medium leading-5 text-white shadow-lg"
+            class="absolute left-4 top-full z-20 mt-2 hidden max-w-[15rem] rounded-xl border border-rose-200 bg-white px-3 py-2 text-xs font-medium leading-5 text-rose-700 shadow-[0_10px_30px_rgba(15,23,42,0.14)] before:absolute before:-top-[7px] before:left-5 before:h-3 before:w-3 before:rotate-45 before:border-l before:border-t before:border-rose-200 before:bg-white"
             data-field-error="phone"
             id={`${formId}-phone-error`}
             role="alert"
@@ -132,12 +132,12 @@ const formId = `contact-form-${source}`;
       </label>
     </div>
 
-    <label class="grid gap-2 text-sm font-medium">
-      Mensaje
+    <label class="grid gap-2 text-sm font-medium text-phx-6">
+      <span>Mensaje</span>
       <span class="relative block">
         <textarea
           aria-describedby={`${formId}-message-error`}
-          class="min-h-[8rem] rounded-2xl border border-phx-8 px-4 py-3 outline-none transition-colors focus:border-phx-3"
+          class="block min-h-[8rem] w-full rounded-2xl border border-phx-8 bg-white px-4 py-3 text-sm text-phx-6 outline-none transition focus:border-phx-3 focus:ring-4 focus:ring-phx-4/60"
           data-field="message"
           maxlength="2000"
           minlength="10"
@@ -147,7 +147,7 @@ const formId = `contact-form-${source}`;
         ></textarea>
         <span
           aria-live="polite"
-          class="pointer-events-none absolute left-0 top-full z-10 mt-2 hidden rounded-2xl bg-rose-600 px-3 py-2 text-xs font-medium leading-5 text-white shadow-lg"
+          class="absolute left-4 top-full z-20 mt-2 hidden max-w-[22rem] rounded-xl border border-rose-200 bg-white px-3 py-2 text-xs font-medium leading-5 text-rose-700 shadow-[0_10px_30px_rgba(15,23,42,0.14)] before:absolute before:-top-[7px] before:left-5 before:h-3 before:w-3 before:rotate-45 before:border-l before:border-t before:border-rose-200 before:bg-white"
           data-field-error="message"
           id={`${formId}-message-error`}
           role="alert"
@@ -177,7 +177,7 @@ const formId = `contact-form-${source}`;
       </p>
     </div>
 
-    <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+    <div class="flex flex-col gap-3">
       <Button data-submit-button size="sm" type="submit">
         Enviar
       </Button>
@@ -351,6 +351,16 @@ const formId = `contact-form-${source}`;
     if (!input || !errorNode) return;
 
     input.setAttribute('aria-invalid', message ? 'true' : 'false');
+    input.classList.toggle('border-rose-300', Boolean(message));
+    input.classList.toggle('bg-rose-50/40', Boolean(message));
+    input.classList.toggle('text-rose-900', Boolean(message));
+    input.classList.toggle('focus:border-rose-400', Boolean(message));
+    input.classList.toggle('focus:ring-rose-100', Boolean(message));
+    input.classList.toggle('border-phx-8', !message);
+    input.classList.toggle('bg-white', !message);
+    input.classList.toggle('text-phx-6', !message);
+    input.classList.toggle('focus:border-phx-3', !message);
+    input.classList.toggle('focus:ring-phx-4/60', !message);
     errorNode.textContent = message;
     errorNode.classList.toggle('hidden', !message);
   }

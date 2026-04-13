@@ -1,26 +1,26 @@
 [
   {
     "title": "Procesos manuales",
-    "description": "Procesos críticos que dependen de personas, planillas, correos y seguimiento manual."
+    "description": "Tu operación depende de planillas, correos y seguimiento manual. Horas críticas se pierden cada semana en tareas que deberían ser automáticas."
   },
   {
     "title": "Datos dispersos",
-    "description": "La información vive en múltiples sistemas y fuentes desconectadas."
+    "description": "La información existe, pero vive en múltiples sistemas que no se conectan. Tomar decisiones requiere cruzar datos manualmente."
   },
   {
     "title": "Decisiones tardías",
-    "description": "La información existe, pero no llega a tiempo para decidir bien."
+    "description": "Cuando el reporte llega, la oportunidad ya pasó. Los equipos operan con información incompleta o desactualizada."
   },
   {
     "title": "Herramientas desconectadas",
-    "description": "Los equipos operan en plataformas separadas sin una lógica unificada."
+    "description": "Cada equipo trabaja en su propio sistema sin una lógica común. La operación funciona como islas, no como un sistema."
   },
   {
     "title": "Tareas repetitivas",
-    "description": "Actividades de bajo valor consumen capacidad operativa relevante."
+    "description": "El talento se consume en tareas de bajo valor. Copy-paste, validaciones manuales y coordinación innecesaria."
   },
   {
-    "title": "Perdida de tiempo operacional",
-    "description": "Se pierde tiempo coordinando, revisando, persiguiendo y corrigiendo."
+    "title": "Pérdida de tiempo operativo",
+    "description": "Gran parte del esfuerzo se va en coordinar, revisar y corregir. No en ejecutar ni generar resultados."
   }
 ]

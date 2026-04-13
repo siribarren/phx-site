@@ -1,0 +1,54 @@
+---
+import Container from '../layout/Container.astro';
+import Card from '../ui/Card.astro';
+import SectionHeading from './SectionHeading.astro';
+
+const metrics = [
+  'Reducción de tiempos operativos (-X%)',
+  'Mejora en contactabilidad (+X%)',
+  'Aumento en productividad (+X%)',
+  'Mayor visibilidad y control en tiempo real',
+];
+
+const examples = [
+  'Empresa financiera — reducción 35% tiempo de gestión',
+  'Telco — +22% contactabilidad',
+];
+---
+
+<section class="py-12 md:py-16" id="resultados">
+  <Container class="space-y-8">
+    <SectionHeading
+      eyebrow="Resultados"
+      title="Resultados reales"
+      description="Placeholder estructural para mostrar impacto operativo y casos concretos una vez que definamos métricas y referencias finales."
+    />
+
+    <div class="grid gap-5 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)]">
+      <Card class="h-full">
+        <div class="space-y-4">
+          <p class="text-sm font-semibold tracking-[0.02em] text-phx-2">Impacto esperado</p>
+          <ul class="grid gap-3">
+            {metrics.map((metric) => (
+              <li class="flex items-start gap-3 rounded-2xl bg-phx-5 px-4 py-3 text-sm font-medium leading-6 text-phx-6 md:text-base">
+                <span class="mt-2 h-2.5 w-2.5 flex-none rounded-full bg-phx-1"></span>
+                <span>{metric}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </Card>
+
+      <div class="grid gap-4">
+        {examples.map((example) => (
+          <Card class="h-full">
+            <div class="space-y-3">
+              <p class="text-xs font-semibold uppercase tracking-[0.08em] text-phx-2">Mini caso</p>
+              <p class="text-lg font-semibold leading-7 text-phx-6">{example}</p>
+            </div>
+          </Card>
+        ))}
+      </div>
+    </div>
+  </Container>
+</section>

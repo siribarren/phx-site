@@ -3,36 +3,36 @@
     "id": "ia",
     "title": "Modelamiento de decisiones",
     "short": "IA",
-    "description": "Modelamos decisiones criticas del negocio para acelerar analisis, clasificacion, recomendacion y respuesta operativa."
+    "description": "Estructuramos decisiones críticas para acelerar análisis, priorización y ejecución."
   },
   {
     "id": "automation",
     "title": "Automatización operativa",
     "short": "Automation",
-    "description": "Diseñamos flujos que coordinan tareas, información, aprobaciones, disparadores y acciones."
+    "description": "Diseñamos flujos que ejecutan tareas, coordinan actores y activan acciones automáticamente."
   },
   {
     "id": "data",
     "title": "Analítica aplicada",
     "short": "Advanced Data Analytics",
-    "description": "Transformamos datos operativos en lectura, predicción y decision accionable."
+    "description": "Transformamos datos en información accionable, predicción y soporte real a la gestión."
   },
   {
     "id": "orchestration",
-    "title": "Orquestacion de sistemas",
+    "title": "Orquestación de sistemas",
     "short": "Orchestration",
-    "description": "Integramos ecosistemas tecnologicos para que la operación fluya como un solo sistema."
+    "description": "Integramos plataformas para que la operación funcione como un solo sistema."
   },
   {
     "id": "efficiency",
     "title": "Eficiencia operacional",
     "short": "Performance",
-    "description": "Creamos mecanismos concretos para aumentar throughput, reducir fricción y liberar capacidad humana."
+    "description": "Reducimos fricción, liberamos capacidad y aumentamos throughput."
   },
   {
     "id": "augmented-capabilities",
     "title": "Capacidades aumentadas",
     "short": "Augmented Capabilities",
-    "description": "Extendemos el trabajo de equipos y liderazgos con asistentes, copilotos y automatizaciones que amplifican criterio, velocidad de respuesta y control operativo."
+    "description": "Extendemos a los equipos con agentes, asistentes y automatización inteligente."
   }
 ]

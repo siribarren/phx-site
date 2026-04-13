@@ -5,6 +5,7 @@ import Intro from '../components/sections/Intro.astro';
 import ProblemsGrid from '../components/sections/ProblemsGrid.astro';
 import CapabilitiesGrid from '../components/sections/CapabilitiesGrid.astro';
 import SolutionsGrid from '../components/sections/SolutionsGrid.astro';
+import ResultsPlaceholder from '../components/sections/ResultsPlaceholder.astro';
 import MethodologySteps from '../components/sections/MethodologySteps.astro';
 import GroupEcosystem from '../components/sections/GroupEcosystem.astro';
 import CTASection from '../components/sections/CTASection.astro';
@@ -39,6 +40,7 @@ const {
 
   <ProblemsGrid items={problems} />
   <SolutionsGrid items={solutions} limit={6} />
+  <ResultsPlaceholder />
   <CapabilitiesGrid items={capabilities} />
   <MethodologySteps items={methodology} />
   <Intro title="Que es PHX">
