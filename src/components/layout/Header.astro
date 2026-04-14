@@ -33,13 +33,13 @@ const pathname = Astro.url.pathname;
       <Button href="/#footer-contacto" size="sm">Conversemos</Button>
     </div>
 
-    <details class="group ml-auto lg:hidden">
+    <details class="ml-auto lg:hidden" data-mobile-menu>
       <summary class="flex h-11 w-11 cursor-pointer list-none items-center justify-center rounded-2xl border border-phx-8 bg-white text-phx-6 transition hover:border-phx-3 hover:text-phx-2">
         <span class="sr-only">Abrir menú</span>
         <span class="flex w-5 flex-col gap-1.5">
-          <span class="h-0.5 w-full rounded-full bg-current transition group-open:translate-y-2 group-open:rotate-45"></span>
-          <span class="h-0.5 w-full rounded-full bg-current transition group-open:opacity-0"></span>
-          <span class="h-0.5 w-full rounded-full bg-current transition group-open:-translate-y-2 group-open:-rotate-45"></span>
+          <span class="h-0.5 w-full rounded-full bg-current"></span>
+          <span class="h-0.5 w-full rounded-full bg-current"></span>
+          <span class="h-0.5 w-full rounded-full bg-current"></span>
         </span>
       </summary>
 
@@ -56,16 +56,37 @@ const pathname = Astro.url.pathname;
                       ? 'border-phx-3 bg-phx-4 text-phx-2'
                       : 'border-phx-8 bg-white text-phx-7 hover:border-phx-3 hover:text-phx-2',
                   ]}
+                  data-mobile-menu-link
                   href={item.href}
                 >
                   {item.label}
                 </a>
               );
             })}
-            <Button href="/#footer-contacto" size="sm">Conversemos</Button>
+            <Button data-mobile-menu-link href="/#footer-contacto" size="sm">Conversemos</Button>
           </nav>
         </Container>
       </div>
     </details>
   </Container>
 </header>
+
+<script>
+  function setupMobileMenu() {
+    document.querySelectorAll('[data-mobile-menu]').forEach((menu) => {
+      if (menu.dataset.enhanced === 'true') return;
+      menu.dataset.enhanced = 'true';
+
+      const closeMenu = () => {
+        menu.removeAttribute('open');
+      };
+
+      menu.querySelectorAll('[data-mobile-menu-link]').forEach((link) => {
+        link.addEventListener('click', closeMenu);
+      });
+    });
+  }
+
+  setupMobileMenu();
+  document.addEventListener('astro:page-load', setupMobileMenu);
+</script>
