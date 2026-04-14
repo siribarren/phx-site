@@ -48,8 +48,8 @@ const socials = [
 
 <footer class="mt-8 bg-phx-2 text-white" id="footer-contacto">
   <Container class="space-y-16 py-14 md:py-16">
-    <div class="grid gap-10 rounded-[2rem] border border-white/10 bg-white/5 p-8 lg:grid-cols-[0.95fr_1.05fr] lg:p-10">
-      <div class="space-y-5">
+    <div class="grid gap-8 rounded-[2rem] border border-white/10 bg-white/5 p-5 sm:p-8 lg:grid-cols-[0.95fr_1.05fr] lg:gap-10 lg:p-10">
+      <div class="min-w-0 space-y-5">
         <p class="text-sm font-semibold tracking-[0.02em] text-white/70">Conversemos</p>
         <h2 class="max-w-2xl text-3xl font-semibold tracking-tight md:text-4xl">
           Empecemos por una conversacion simple y un problema concreto
@@ -73,6 +73,7 @@ const socials = [
       </div>
 
       <ContactForm
+        class="min-w-0 w-full"
         intro="Dejanos tus datos y el desafio principal. Este envio esta protegido para reducir spam y solicitudes automatizadas."
         source="footer"
         title="Formulario de contacto"
