@@ -37,13 +37,15 @@ jobs:
           FTP_HOST: ${{ secrets.CPANEL_FTP_HOST }}
           FTP_USER: ${{ secrets.CPANEL_FTP_USER }}
           FTP_PASS: ${{ secrets.CPANEL_FTP_PASS }}
+          FTP_REMOTE_DIR: ${{ secrets.CPANEL_FTP_REMOTE_DIR }}
         run: |
+          REMOTE_DIR="${FTP_REMOTE_DIR:-.}"
           lftp -c "
           set ftp:ssl-allow no;
           set net:max-retries 2;
           set net:timeout 20;
           set xfer:clobber on;
           open -u $FTP_USER,$FTP_PASS $FTP_HOST;
-          mirror -R --verbose dist/ /public_html/;
+          mirror -R --verbose dist/ ${REMOTE_DIR};
           bye
           "

@@ -32,5 +32,40 @@ const pathname = Astro.url.pathname;
     <div class="hidden sm:block">
       <Button href="/#footer-contacto" size="sm">Conversemos</Button>
     </div>
+
+    <details class="group ml-auto lg:hidden">
+      <summary class="flex h-11 w-11 cursor-pointer list-none items-center justify-center rounded-2xl border border-phx-8 bg-white text-phx-6 transition hover:border-phx-3 hover:text-phx-2">
+        <span class="sr-only">Abrir menú</span>
+        <span class="flex w-5 flex-col gap-1.5">
+          <span class="h-0.5 w-full rounded-full bg-current transition group-open:translate-y-2 group-open:rotate-45"></span>
+          <span class="h-0.5 w-full rounded-full bg-current transition group-open:opacity-0"></span>
+          <span class="h-0.5 w-full rounded-full bg-current transition group-open:-translate-y-2 group-open:-rotate-45"></span>
+        </span>
+      </summary>
+
+      <div class="absolute inset-x-0 top-full border-t border-phx-8 bg-white shadow-[0_18px_40px_rgba(15,23,42,0.08)]">
+        <Container class="py-4">
+          <nav aria-label="Principal móvil" class="grid gap-2">
+            {navigation.map((item) => {
+              const isActive = item.href === '/' ? pathname === '/' : pathname === '/' && item.href.startsWith('/#');
+              return (
+                <a
+                  class:list={[
+                    'rounded-2xl border px-4 py-3 text-sm font-medium transition-colors',
+                    isActive
+                      ? 'border-phx-3 bg-phx-4 text-phx-2'
+                      : 'border-phx-8 bg-white text-phx-7 hover:border-phx-3 hover:text-phx-2',
+                  ]}
+                  href={item.href}
+                >
+                  {item.label}
+                </a>
+              );
+            })}
+            <Button href="/#footer-contacto" size="sm">Conversemos</Button>
+          </nav>
+        </Container>
+      </div>
+    </details>
   </Container>
 </header>
